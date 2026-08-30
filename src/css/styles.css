@@ -233,6 +233,75 @@ a:hover {
   align-items: center;
 }
 
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.hero-photo {
+  width: 100%;
+  height: min(34rem, 72vh);
+  object-fit: cover;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.card-media,
+.sensei img,
+.album img,
+.news-card img,
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-media,
+.album img,
+.news-card img {
+  height: 12.5rem;
+  border-radius: 14px 14px 0 0;
+  margin: -1.35rem -1.4rem 1rem;
+  width: calc(100% + 2.8rem);
+  max-width: none;
+}
+
+.sensei img {
+  height: 16rem;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+}
+
+.vorstand-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 1.2rem;
+  object-fit: cover;
+  max-height: 28rem;
+}
+
+.partner img {
+  height: 2.4rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.qr {
+  width: min(14rem, 100%);
+  height: auto;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.card .photo {
+  border-radius: 12px;
+  margin-top: 0.8rem;
+  max-height: 14rem;
+}
+
 .hero::after {
   content: "空手道";
   position: absolute;
@@ -627,8 +696,14 @@ address {
   .album-grid,
   .news-grid,
   .footer-grid,
-  .stats {
+  .stats,
+  .hero-layout {
     grid-template-columns: 1fr;
+  }
+
+  .hero-photo {
+    height: 18rem;
+    order: -1;
   }
 
   .footer-meta,

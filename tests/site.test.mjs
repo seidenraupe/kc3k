@@ -65,6 +65,17 @@ test("News-Daten sind vollständig", () => {
   }
 });
 
+test("Vereinsfotos liegen im Build", () => {
+  for (const file of [
+    "media/team/giuseppe-lucchena.jpg",
+    "media/home/seiza.jpg",
+    "media/galerie/lager-2019.jpg",
+    "media/faq/twint.png",
+  ]) {
+    assert.ok(existsSync(resolve(dist, file)), `fehlt: ${file}`);
+  }
+});
+
 test("Gebaute Assets nutzen relative Pfade für GitHub Pages", () => {
   const html = readFileSync(resolve(dist, "index.html"), "utf8");
   assert.match(html, /href="\.\/assets\/[^"]+\.css"/);

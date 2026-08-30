@@ -11,6 +11,12 @@ if (list) {
       ...items.map((item) => {
         const article = document.createElement("article");
         article.className = "news-card";
+        if (item.image) {
+          const img = document.createElement("img");
+          img.src = item.image;
+          img.alt = "";
+          article.append(img);
+        }
         const date = document.createElement("p");
         date.className = "meta";
         date.textContent = item.date;
