@@ -1,6 +1,8 @@
 # Hosting auf kreativmedia.ch
 
-giger-straehl.ch liegt bei KreativMedia und antwortet mit einer Plesk-Standardseite. Dasselbe Panel eignet sich für kc3k.ch: statische Dateien ins Document-Root, SSL per Let’s Encrypt.
+**Noch nicht einrichten.** Zuerst entscheidet der Vorstand anhand des GitHub-Stands. Die Anleitung bleibt für den Moment danach.
+
+giger-straehl.ch liegt bei KreativMedia und antwortet mit einer Plesk-Standardseite. Dasselbe Panel eignet sich später für kc3k.ch: statische Dateien ins Document-Root, SSL per Let’s Encrypt.
 
 ## Empfohlene Einrichtung
 

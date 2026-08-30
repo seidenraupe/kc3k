@@ -2,7 +2,7 @@
 
 Statische HTML-Website für [kc3k.ch](https://www.kc3k.ch). Ablösung der Wix-Seite: dieselben Vereinsinhalte, ohne monatliches Baukasten-Abo.
 
-Hosting ist für **kreativmedia.ch** (Plesk, wie giger-straehl.ch) vorgesehen. Dokumentation, Tests und Deployment laufen über **GitHub**.
+**Stand:** Entscheidungsgrundlage für den Vorstand. Tests und Deployment laufen auf **GitHub** (inkl. GitHub Pages als Vorschau). Auf **kreativmedia.ch** wird noch nichts eingerichtet.
 
 ## Lokal starten
 
@@ -44,7 +44,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 
 - [Konzept](docs/KONZEPT.md) — Warum HTML, Architektur, Kosten
 - [Hosting](docs/HOSTING.md) — kreativmedia / Plesk, Domain, Mail
-- [GitHub](docs/GITHUB.md) — Tests, Secrets, Deployment
+- [GitHub](docs/GITHUB.md) — Tests, Pages, Deployment für den Vorstand
 - [Migration](docs/MIGRATION.md) — Schnitt von Wix nach kc3k.ch
 
 ## Lizenz

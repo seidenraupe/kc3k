@@ -6,13 +6,13 @@ Die Vereinswebsite [www.kc3k.ch](https://www.kc3k.ch) läuft auf Wix. Die Namese
 
 Wix erhöht das günstige Abo erneut — auf über 180 EUR pro Jahr. Für eine überschaubare Vereinsseite mit festen Seiten, PDFs und einem Kontaktformular ist das nicht mehr vertretbar.
 
-Dieses Repository ist die Ablösung: eine **html-basierte, statische Website**. Sie bildet die bestehenden Inhalte ab, läuft auf dem bestehenden Hosting bei **kreativmedia.ch** (Plesk, gleiches Umfeld wie giger-straehl.ch) und wird über **GitHub** dokumentiert, geprüft und ausgerollt.
+Dieses Repository ist die Entscheidungsgrundlage: eine **html-basierte, statische Website**. Sie bildet die bestehenden Inhalte ab. Prüfung und Deployment sind auf **GitHub** sichtbar (Actions + Pages). Ein Umzug auf **kreativmedia.ch** folgt erst, wenn der Vorstand diese Basis bestätigt — dort wird vorerst nichts eingerichtet.
 
 ## Ziel
 
 1. Dieselben Informationen wie heute: Verein, Training, Team, Leitbild, News, Galerie, FAQ, Schnupperanfrage.
 2. Kein Baukasten-Abo, keine Wix-Abhängigkeit, keine Tracking-Pflicht.
-3. Wartung durch den Webmaster: Texte in HTML oder einer JSON-Datei, Push nach GitHub, automatischer Test, Upload nach Plesk.
+3. Wartung durch den Webmaster: Texte in HTML oder einer JSON-Datei, Push nach GitHub, automatischer Test, Vorschau über GitHub Pages.
 4. Domain `kc3k.ch` bleibt. E-Mail `info@kc3k.ch` und `mail.kc3k.ch` bleiben unangetastet.
 
 ## Warum HTML und nicht WordPress
@@ -54,13 +54,15 @@ Auf kreativmedia reicht Apache mit `httpdocs`. Node wird nur auf dem Rechner des
 
 ## Design
 
-Angelehnt an das Vereinslogo (Karate-Club 3K Winterthur, Kihon–Kata–Kumite):
+Farben aus dem Vereinslogo (gemessen, nicht frei erfunden):
 
-- Bordeaux / Tiefrot als Akzent
-- Warmes Papier statt kaltem Grau
-- Oswald für Titel, Source Sans 3 für Fliesstext
-- Kanji 空手道 als dezentes Hero-Motiv
-- Desktop-Navigation und Off-Canvas-Menü auf dem Handy
+- Himmelblau der Logo-Mitte `#9fd8f2` für Flächen und Verläufe
+- Ring-Rot `#7a2726` für Navigation, Zahlen und Buttons
+- Sonnen-Rot `#e8432f` für Hover
+- Sonnen-Gold `#e0b45a` für feine Linien
+- Weiss wie der Logo-Ring als Grundfläche
+
+Typografie: Outfit für Titel, Source Sans 3 für Fliesstext. Kanji 空手道 als dezentes Hero-Motiv. Desktop-Navigation und Off-Canvas-Menü auf dem Handy.
 
 Clubfotos bleiben bis zur Medienmigration auf Wix. Die Galerie listet die bestehenden Alben bereits.
 
@@ -73,12 +75,12 @@ Webmaster ändert Datei
         ↓
   Actions: Build + Tests
         ↓
-  FTPS nach Plesk /httpdocs
+  GitHub Pages (Vorschau für den Vorstand)
         ↓
-     www.kc3k.ch
+  später optional: FTPS nach Plesk / httpdocs → www.kc3k.ch
 ```
 
-Alternativ kann Plesk das GitHub-Repository selbst ziehen. Dann muss der Build entweder in Actions geschehen (empfohlen) oder per Post-Deploy-Skript auf dem Server.
+kreativmedia/Plesk bleibt Absicht, nicht der aktuelle Schritt.
 
 ## Kostenvergleich
 
@@ -106,9 +108,6 @@ Diese Dinge können später ergänzt werden, ohne die HTML-Basis zu verlassen.
 
 ## Nächste Schritte
 
-1. Repository auf GitHub anlegen (privat) und dieses Projekt pushen.
-2. In Plesk eine Website / Subdomain für den Test anlegen, z. B. `neu.kc3k.ch` oder eine Subdomain auf dem bestehenden Account.
-3. GitHub-Secrets für FTPS setzen und einmal erfolgreich deployen.
-4. Vorstand die Preview zeigen, Texte und Fotos nachziehen.
-5. DNS von Wix auf kreativmedia umstellen, Mail-Records nicht anfassen.
-6. Wix-Abo kündigen, sobald `www.kc3k.ch` stabil auf dem neuen Host antwortet.
+1. Vorstand schaut sich auf GitHub den Stand, die Actions und die Pages-Vorschau an.
+2. Entscheid: auf dieser HTML-Basis weiterarbeiten oder nicht.
+3. Erst danach: Staging auf kreativmedia, DNS-Schnitt, Wix kündigen.

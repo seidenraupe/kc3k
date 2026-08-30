@@ -5,10 +5,21 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Vorschau für den Vorstand über GitHub Pages.
+# Kein Upload nach kreativmedia, bis der Verein das beschlossen hat.
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment: produktion
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -17,16 +28,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - name: Nach kreativmedia / Plesk hochladen
-        if: ${{ secrets.FTP_HOST != '' }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          protocol: ftps
-      - name: Deployment übersprungen
-        if: ${{ secrets.FTP_HOST == '' }}
-        run: echo "Keine FTP-Secrets gesetzt. Build ist geprüft; Upload folgt nach Plesk- oder FTP-Konfiguration."
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
