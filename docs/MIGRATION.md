@@ -43,7 +43,9 @@ Redirect 301 /news-1 /infos.html
 
 ## Medien
 
-Wix-Bilder liegen unter `static.wixstatic.com`. Für den Dauerbetrieb gehören sie ins Repository (`public/galerie/…`) oder in einen Ordner auf dem Plesk-Webspace. Hotlinking auf Wix nach der Kündigung vermeiden.
+Die öffentlichen Vereinsfotos liegen unter `public/media/`. Was gegenüber Wix noch fehlt (Alben-Inhalte, zwei Infos-Grafiken, drei Leitbild-Fotos), steht in [FOTOS.md](FOTOS.md).
+
+Wix-Originale nicht nach der Kündigung weiter per Hotlink nutzen.
 
 ## Go-Live-Checkliste
 
