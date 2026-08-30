@@ -28,16 +28,18 @@ Die sechs Sensei-Porträts und das Vorstandsfoto von der Wix-Teamseite sind unte
 | `statuten-200x200.jpg` | **fehlt** — auf Wix eine Kachel-Grafik «Statuten», hier nur Text |
 | `become-a-sponsor.png` | **fehlt** — auf Wix eine Sponsor-Grafik, hier nur Text |
 
-## Leitbild — drei Trainingsfotos fehlen
+## Leitbild — vollständig
 
-Auf Wix stehen sechs Fotos, hier drei:
+Alle sechs öffentlichen Wix-Fotos der Leitbild-Seite sind unter `public/media/leitbild/` zugeordnet:
 
-| Wix-Datei | Status |
+| Wix-Datei | Datei hier |
 | --- | --- |
-| Training-01, Training-07, Training-08 | vorhanden (`shin.jpg`, `gi.jpg`, bzw. analog genutzt) |
-| `Andre in action.jpg` | **fehlt** |
-| `KC3K - Training-19.jpg` | **fehlt** |
-| `Karate - Giusi - 4 von 25.jpg` | nicht extra abgelegt — dasselbe Gruppenfoto wie auf der Titelseite |
+| Training-01 | `shin.jpg` |
+| Training-07 | `gi.jpg` |
+| Training-08 | `kinder.jpg` |
+| Training-19 | `technik.jpg` |
+| Andre in action | `familie.jpg` |
+| Karate – Giusi – 4 von 25 | nicht extra — dasselbe Gruppenfoto wie auf der Titelseite |
 
 ## News — keine zusätzlichen Wix-Fotos
 

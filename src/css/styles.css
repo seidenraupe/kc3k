@@ -286,19 +286,32 @@ a:hover {
 }
 
 .sensei img {
-  height: 16rem;
-  object-position: 50% 12%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
   border-radius: 14px;
   margin-bottom: 1rem;
 }
 
 .vorstand-photo {
   width: 100%;
+  height: auto;
+  max-height: none;
   border-radius: var(--radius);
   margin-bottom: 1.2rem;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.panel .photo {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  height: auto;
   object-fit: cover;
-  object-position: 50% 40%;
-  max-height: 28rem;
+  object-position: 50% 18%;
+  border-radius: 12px;
+  margin: 0 0 1rem;
 }
 
 .photo-wide {
@@ -478,12 +491,19 @@ a:hover {
   align-items: stretch;
 }
 
+.grid-2-even {
+  grid-template-columns: 1fr 1fr;
+}
+
 .card,
 .sensei,
 .news-card,
 .album,
 .faq-item,
 .panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -738,6 +758,7 @@ address {
 
   .grid-3,
   .grid-2,
+  .grid-2-even,
   .sensei-grid,
   .album-grid,
   .news-grid,
