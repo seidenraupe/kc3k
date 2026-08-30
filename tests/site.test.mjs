@@ -65,6 +65,14 @@ test("News-Daten sind vollständig", () => {
   }
 });
 
+test("Gebaute Assets nutzen relative Pfade für GitHub Pages", () => {
+  const html = readFileSync(resolve(dist, "index.html"), "utf8");
+  assert.match(html, /href="\.\/assets\/[^"]+\.css"/);
+  assert.match(html, /src="\.\/assets\/[^"]+\.js"/);
+  assert.doesNotMatch(html, /href="\/assets\//);
+  assert.doesNotMatch(html, /src="\/assets\/logo/);
+});
+
 test("Interne Navigation zeigt auf vorhandene Dateien", () => {
   const html = readFileSync(resolve(dist, "index.html"), "utf8");
   const hrefs = [...html.matchAll(/href="([^"]+\.html)"/g)].map((match) => match[1]);

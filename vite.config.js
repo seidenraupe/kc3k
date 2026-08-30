@@ -46,6 +46,8 @@ function htmlPartials() {
 
 export default defineConfig({
   root,
+  // Relativ, damit GitHub Pages unter /kc3k/ und später kc3k.ch in der Wurzel funktionieren.
+  base: "./",
   publicDir: resolve(import.meta.dirname, "public"),
   plugins: [htmlPartials()],
   server: {
