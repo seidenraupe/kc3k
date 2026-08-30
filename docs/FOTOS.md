@@ -45,21 +45,9 @@ Alle sechs öffentlichen Wix-Fotos der Leitbild-Seite sind unter `public/media/l
 
 Die Beiträge 89–92 verlinken auf Google-Drive-PDFs und haben auf Wix kein eigenes Beitragsfoto. `4-dan.jpg` und `lager-2023.jpg` sind die beiden älteren News-Bilder und liegen unter `public/media/news/`.
 
-## Galerie — nur Titelbilder, keine Alben
+## Galerie — Cover plus Links
 
-Die sieben Alben der Wix-Galerie haben hier **je ein Cover**. Der Rest jedes Albums fehlt:
-
-| Album | Cover hier | Was fehlt |
-| --- | --- | --- |
-| Karate-Lager 2019 | `lager-2019.jpg` | alle weiteren Lagerfotos |
-| Turnier Dagmarsellen 2019 | `dagmarsellen-2019.jpg` | restliche Turnierfotos |
-| Herbstturnier SKR 2018 | `herbstturnier-2018.jpg` | restliche Turnierfotos |
-| Jahresfest 2018 | `jahresfest-2018.jpg` | restliche Festfotos |
-| Trainingslager Kerenzerberg 2018 | `kerenzerberg-2018.jpg` | restliche Lagerfotos |
-| Winti-Cup 2018 | `winti-cup-2018.jpg` | restliche Cup-Fotos |
-| Kata, Giuseppe Lucchena | `kata-lucchena.jpg` | restliche Kata-Serie («Giusi, n von 25») |
-
-Wix zeigt öffentlich nur die Cover; die Album-Inhalte sitzen in der Wix-Galerie (Editor oder eingeloggte Ansicht). Ohne Export aus dem Editor oder neue Dateien vom Vorstand können wir die Alben nicht füllen.
+Acht Alben wie auf Wix, je mit Cover. «Mehr Fotos» öffnet die Google-Fotos- oder Drive-Alben der Wix-Seite; «Video» bei Kata Lucchena öffnet die Dropbox-Datei. Die einzelnen Album-Bilder liegen nicht im Repo.
 
 ## FAQ
 
@@ -69,7 +57,7 @@ TWINT-QR ist vorhanden. Instagram- und Facebook-Icons der Wix-Seite fehlen bewus
 
 Nicht auf der öffentlichen Wix-Seite, aber für eine vollständige Migration nötig:
 
-- Inhalt der sieben Fotoalben (oder ein Export aus dem Wix-Editor)
+- Neuere Lager- und Turnierfotos, falls die Google-Alben ersetzt werden sollen
 - Aktuelle Lager- und Turnierfotos der letzten Jahre
 - Offizielle Anmelde-PDFs (Aktiv / Passiv)
 - Statuten-PDF, falls es öffentlich werden soll

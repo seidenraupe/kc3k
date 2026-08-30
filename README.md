@@ -28,7 +28,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 | `team.html` | Senseis und Vorstand |
 | `leitbild.html` | Philosophie, Beiträge, Familie |
 | `news.html` | 3K-News aus `src/data/news.json` |
-| `galerie.html` | Alben-Übersicht (Fotos nach Migration) |
+| `galerie.html` | Alben mit Cover, Mehr Fotos und Video |
 | `faq.html` | Beitrag, IBAN, Geschichte |
 | `anmelden.html` | Schnupperanfrage per E-Mail |
 | `impressum.html` / `datenschutz.html` | Rechtliches |

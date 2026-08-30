@@ -245,7 +245,7 @@ a:hover {
   height: auto;
   aspect-ratio: 5 / 4;
   object-fit: cover;
-  object-position: 62% 38%;
+  object-position: 58% 40%;
   border-radius: 28px;
   box-shadow: var(--shadow);
 }
@@ -514,6 +514,20 @@ a:hover {
 .card p:last-child,
 .panel p:last-child {
   margin-bottom: 0;
+}
+
+.album-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: auto 0 0;
+  padding-top: 1rem;
+}
+
+.album-actions .button {
+  min-height: 2.3rem;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.92rem;
 }
 
 .meta {

@@ -65,6 +65,14 @@ test("News-Daten sind vollständig", () => {
   }
 });
 
+test("Galerie verlinkt Mehr Fotos und Video", () => {
+  const html = readFileSync(resolve(dist, "galerie.html"), "utf8");
+  assert.match(html, /Mehr Fotos/);
+  assert.match(html, />Video</);
+  assert.match(html, /photos\.app\.goo\.gl/);
+  assert.match(html, /dropbox\.com\/s\/cvhngxf9kzhfmqs\/Katas\.mp4/);
+});
+
 test("Vereinsfotos liegen im Build", () => {
   for (const file of [
     "media/team/giuseppe-lucchena.jpg",
