@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+  <head>
+    <!--partial:head-end-->
+    <title>News | Karate-Club 3K Winterthur</title>
+    <meta name="description" content="3K-News und aktuelle Beiträge rund um den Karate-Club 3K." />
+  </head>
+  <body>
+    <!--partial:header-->
+    <main id="inhalt">
+      <section class="page-hero">
+        <div class="wrap">
+          <p class="kicker">Vereinszeitung</p>
+          <h1>KC3K-News</h1>
+          <p>Hier erfährst du das Neueste rund um unseren Verein.</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <p class="note">
+            Die Ausgaben liegen als PDF vor. Eine neue Ausgabe ergänzt du in
+            <code>src/data/news.json</code> — ohne Wix, ohne Abo.
+          </p>
+          <div class="news-grid" data-news-list></div>
+          <p class="empty-state" data-news-empty hidden>Noch keine Beiträge vorhanden.</p>
+        </div>
+      </section>
+    </main>
+    <!--partial:footer-->
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/news.js"></script>
+  </body>
+</html>

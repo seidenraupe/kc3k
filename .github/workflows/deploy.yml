@@ -1,0 +1,32 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: produktion
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Nach kreativmedia / Plesk hochladen
+        if: ${{ secrets.FTP_HOST != '' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          protocol: ftps
+      - name: Deployment übersprungen
+        if: ${{ secrets.FTP_HOST == '' }}
+        run: echo "Keine FTP-Secrets gesetzt. Build ist geprüft; Upload folgt nach Plesk- oder FTP-Konfiguration."

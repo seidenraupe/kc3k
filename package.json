@@ -1,0 +1,19 @@
+{
+  "name": "kc3k-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Statische Vereinswebsite des Karate-Club 3K Winterthur",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 43147",
+    "test": "node --test tests/*.test.mjs",
+    "lint:html": "html-validate dist",
+    "check": "npm run build && npm run lint:html && npm test"
+  },
+  "devDependencies": {
+    "html-validate": "^9.7.1",
+    "vite": "^6.3.5"
+  }
+}
