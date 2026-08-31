@@ -489,6 +489,16 @@ a:hover {
   }
 }
 
+@media (min-width: 921px) and (min-height: 840px) {
+  .hero h1 {
+    font-size: clamp(3.4rem, 10vh, 5.8rem);
+  }
+
+  .hero-actions {
+    margin-top: 1.35rem;
+  }
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
