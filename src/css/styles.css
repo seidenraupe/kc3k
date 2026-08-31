@@ -226,9 +226,9 @@ a:hover {
   color: #fff;
   background: #0f2430;
   display: grid;
-  align-items: end;
-  aspect-ratio: 980 / 718;
-  min-height: 28rem;
+  align-items: center;
+  min-height: calc(100vh - var(--header));
+  max-height: calc(100vh - var(--header));
 }
 
 .hero-photo {
@@ -253,7 +253,7 @@ a:hover {
 .hero-inner {
   position: relative;
   z-index: 1;
-  padding: 5.5rem 0 3rem;
+  padding: 4.5rem 0;
   max-width: 34rem;
 }
 
@@ -811,8 +811,11 @@ address {
   }
 
   .hero {
+    align-items: end;
     min-height: 22rem;
+    max-height: none;
     aspect-ratio: 980 / 718;
+    height: auto;
   }
 
   .hero-inner {
