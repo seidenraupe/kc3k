@@ -223,31 +223,73 @@ a:hover {
 .hero {
   position: relative;
   overflow: hidden;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 88% 12%, rgba(224, 180, 90, 0.28), transparent 22%),
-    radial-gradient(circle at 78% 70%, rgba(159, 216, 242, 0.7), transparent 34%),
-    linear-gradient(165deg, #ffffff 0%, #e7f5fb 58%, #cfeaf6 100%);
-  min-height: calc(100vh - var(--header));
+  color: #fff;
+  background: #0f2430;
+  min-height: min(78vh, 46rem);
   display: grid;
-  align-items: center;
-}
-
-.hero-layout {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 2.4rem;
-  align-items: center;
+  align-items: end;
 }
 
 .hero-photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  aspect-ratio: 5 / 4;
+  height: 100%;
   object-fit: cover;
-  object-position: 58% 40%;
-  border-radius: 28px;
-  box-shadow: var(--shadow);
+  object-position: 68% 42%;
+  border-radius: 0;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15, 36, 48, 0.78) 0%, rgba(15, 36, 48, 0.42) 38%, rgba(15, 36, 48, 0.08) 70%),
+    linear-gradient(180deg, rgba(15, 36, 48, 0.15) 0%, rgba(15, 36, 48, 0.55) 100%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 5.5rem 0 3rem;
+  max-width: 34rem;
+}
+
+.hero .kicker {
+  color: var(--gold);
+}
+
+.hero .lede {
+  color: rgba(247, 252, 255, 0.9);
+  max-width: 26rem;
+}
+
+.hero .button-ghost {
+  background: transparent;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero .button-ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff !important;
+}
+
+.hero-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-bar .stats {
+  margin: 0;
+  padding: 1.35rem 0 1.5rem;
+}
+
+.hero-bar .stat {
+  padding: 0 0 0 0.95rem;
+  border-top: 0;
+  border-left: 3px solid var(--gold);
 }
 
 .card-media,
@@ -342,25 +384,6 @@ a:hover {
   max-height: 14rem;
 }
 
-.hero::after {
-  content: "空手道";
-  position: absolute;
-  right: -0.2rem;
-  bottom: -1.8rem;
-  font-size: clamp(6rem, 22vw, 16rem);
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  color: var(--sky-deep);
-  opacity: 0.1;
-  pointer-events: none;
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  padding: 4.5rem 0 5rem;
-}
-
 .kicker {
   display: inline-flex;
   align-items: center;
@@ -394,9 +417,9 @@ a:hover {
 }
 
 .hero h1 {
-  margin: 0 0 1rem;
-  max-width: 13ch;
-  font-size: clamp(2.8rem, 8vw, 5.6rem);
+  margin: 0 0 0.85rem;
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
   font-weight: 800;
 }
 
@@ -411,7 +434,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.8rem;
+  margin-top: 1.4rem;
 }
 
 .stats {
@@ -782,13 +805,21 @@ address {
   .album-grid,
   .news-grid,
   .footer-grid,
-  .stats,
-  .hero-layout {
+  .stats {
     grid-template-columns: 1fr;
   }
 
-  .hero-photo {
-    order: -1;
+  .hero {
+    min-height: min(70vh, 34rem);
+  }
+
+  .hero-inner {
+    padding: 4rem 0 2.2rem;
+    max-width: none;
+  }
+
+  .hero-bar .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .dojo-split {
