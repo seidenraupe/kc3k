@@ -588,7 +588,7 @@ a:hover {
 .panel {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -819,7 +819,8 @@ address {
 
 .stack {
   display: grid;
-  gap: 1rem;
+  align-content: start;
+  gap: 1.1rem;
 }
 
 .mt-card {
