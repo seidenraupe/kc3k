@@ -819,8 +819,11 @@ address {
 
 .stack {
   display: grid;
-  align-content: start;
+  grid-template-rows: 1fr 1fr;
+  align-content: stretch;
+  align-self: stretch;
   gap: 1.1rem;
+  min-height: 0;
 }
 
 .mt-card {
