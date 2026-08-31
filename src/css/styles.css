@@ -225,9 +225,10 @@ a:hover {
   overflow: hidden;
   color: #fff;
   background: #0f2430;
-  min-height: min(78vh, 46rem);
   display: grid;
   align-items: end;
+  aspect-ratio: 980 / 718;
+  min-height: 28rem;
 }
 
 .hero-photo {
@@ -236,7 +237,7 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 68% 42%;
+  object-position: 50% 50%;
   border-radius: 0;
 }
 
@@ -810,7 +811,8 @@ address {
   }
 
   .hero {
-    min-height: min(70vh, 34rem);
+    min-height: 22rem;
+    aspect-ratio: 980 / 718;
   }
 
   .hero-inner {
