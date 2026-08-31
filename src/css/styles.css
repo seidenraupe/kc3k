@@ -226,7 +226,7 @@ a:hover {
   color: #fff;
   background: #0f2430;
   display: grid;
-  align-items: center;
+  align-items: start;
   min-height: calc(100vh - var(--header));
   max-height: calc(100vh - var(--header));
 }
@@ -245,15 +245,16 @@ a:hover {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(15, 36, 48, 0.78) 0%, rgba(15, 36, 48, 0.42) 38%, rgba(15, 36, 48, 0.08) 70%),
-    linear-gradient(180deg, rgba(15, 36, 48, 0.15) 0%, rgba(15, 36, 48, 0.55) 100%);
+    linear-gradient(90deg, rgba(15, 36, 48, 0.78) 0%, rgba(15, 36, 48, 0.35) 34%, rgba(15, 36, 48, 0.06) 58%),
+    linear-gradient(180deg, rgba(15, 36, 48, 0.5) 0%, rgba(15, 36, 48, 0.12) 38%, transparent 62%);
   pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
   z-index: 1;
-  padding: 4.5rem 0;
+  align-self: start;
+  padding: 1.6rem 0 1.25rem;
   max-width: 34rem;
 }
 
@@ -418,9 +419,9 @@ a:hover {
 }
 
 .hero h1 {
-  margin: 0 0 0.85rem;
-  max-width: 12ch;
-  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  margin: 0 0 0.55rem;
+  max-width: 16ch;
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
   font-weight: 800;
 }
 
@@ -435,7 +436,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
 }
 
 .stats {
@@ -816,6 +817,12 @@ address {
     max-height: none;
     aspect-ratio: 980 / 718;
     height: auto;
+  }
+
+  .hero-scrim {
+    background:
+      linear-gradient(90deg, rgba(15, 36, 48, 0.72) 0%, rgba(15, 36, 48, 0.28) 42%, transparent 68%),
+      linear-gradient(180deg, rgba(15, 36, 48, 0.12) 0%, rgba(15, 36, 48, 0.55) 100%);
   }
 
   .hero-inner {
