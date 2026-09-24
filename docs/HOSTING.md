@@ -25,13 +25,13 @@ Secrets gehören ins Repository **kc3k**, unter *Settings → Secrets and variab
 | `SSH_USER` | Systembenutzer des Abos mit Shell, im FTP-Dialog der Benutzer mit Basisverzeichnis `/` (nicht das reine FTP-Konto `kc3k`) |
 | `SSH_TARGET_DIR` | Document-Root von `kc3k.ch`, der Ordner mit der bestehenden `index.html`. Im Abo liegt er als `kc3k.ch`, oft absolut `/var/www/vhosts/<abo>/kc3k.ch` |
 | `SSH_PRIVATE_KEY` | Privater Schlüssel, eine Zeile `-----BEGIN … KEY-----` bis `-----END … KEY-----` |
-| `SSH_PORT` | optional, Standard `22` |
+| `SSH_PORT` | `2121` (auf diesem Server, nicht 22) |
 
 `SSH_TARGET_DIR` darf nicht `/` und nicht das `httpdocs` einer anderen Domain sein. Der Sync löscht im Zielordner Dateien, die nicht mehr im Build sind.
 
 ### SSH in Plesk einschalten
 
-Auf `80.74.151.81` antwortet Port 22 derzeit nicht. Bevor der erste Action-Lauf durchkommt:
+Auf `80.74.151.81` ist SSH über Port **2121** erreichbar (OpenSSH). Port 22 ist geschlossen. Bevor der erste Action-Lauf durchkommt:
 
 1. Lokal einen Schlüssel erzeugen: `ssh-keygen -t ed25519 -f kc3k-deploy -C "github-actions-kc3k"`.
 2. In Plesk beim Systembenutzer **SSH-Zugriff** auf `/bin/bash` stellen.
