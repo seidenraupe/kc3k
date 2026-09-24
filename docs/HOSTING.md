@@ -22,19 +22,20 @@ Secrets gehören ins Repository **kc3k**, unter *Settings → Secrets and variab
 | Secret | Wert für kc3k |
 | --- | --- |
 | `SSH_HOST` | `80.74.151.81` |
-| `SSH_USER` | Systembenutzer des Abos mit Shell, im FTP-Dialog der Benutzer mit Basisverzeichnis `/` (nicht das reine FTP-Konto `kc3k`) |
-| `SSH_TARGET_DIR` | Document-Root von `kc3k.ch`, der Ordner mit der bestehenden `index.html`. Im Abo liegt er als `kc3k.ch`, oft absolut `/var/www/vhosts/<abo>/kc3k.ch` |
-| `SSH_PRIVATE_KEY` | Privater Schlüssel, eine Zeile `-----BEGIN … KEY-----` bis `-----END … KEY-----` |
-| `SSH_PORT` | `2121` (auf diesem Server, nicht 22) |
+| `SSH_USER` | `giger` |
+| `SSH_TARGET_DIR` | `/kc3k.ch` |
+| `SSH_PRIVATE_KEY` | Privater Schlüssel `kc3k-deploy`, Fingerabdruck `SHA256:xhyVWVuLaCxWSfEEVOEt05P9npzIOVneOw8JshCzf08` |
 
-`SSH_TARGET_DIR` darf nicht `/` und nicht das `httpdocs` einer anderen Domain sein. Der Sync löscht im Zielordner Dateien, die nicht mehr im Build sind.
+Der Port ist im Workflow fest **2121**. Ein Secret `SSH_PORT` wird nicht gelesen. Port 22 ist auf diesem Server geschlossen. Die Shell von `giger` ist eine Plesk-Chroot: `/var/www/vhosts/...` ist dort nicht sichtbar, der Document-Root heißt `/kc3k.ch`.
+
+`SSH_TARGET_DIR` darf nicht `/` und nicht das `httpdocs` einer anderen Domain sein. Der Sync löscht im Zielordner Dateien, die nicht mehr im Build sind. Die Datei `kc3k-kreativmedia.zip` bleibt liegen.
 
 ### SSH in Plesk einschalten
 
 Auf `80.74.151.81` ist SSH über Port **2121** erreichbar (OpenSSH). Port 22 ist geschlossen. Bevor der erste Action-Lauf durchkommt:
 
 1. Lokal einen Schlüssel erzeugen: `ssh-keygen -t ed25519 -f kc3k-deploy -C "github-actions-kc3k"`.
-2. In Plesk beim Systembenutzer **SSH-Zugriff** auf `/bin/bash` stellen.
+2. In Plesk beim Benutzer `giger` den SSH-Zugriff eingeschaltet lassen. Die Chroot-Shell bleibt, der Website-Ordner heißt dort `/kc3k.ch`.
 3. Den Inhalt von `kc3k-deploy.pub` als SSH-Schlüssel dieses Benutzers hinterlegen.
 4. Den Inhalt von `kc3k-deploy` (ohne `.pub`) als Secret `SSH_PRIVATE_KEY` speichern. Die private Datei nicht ins Repository legen.
 

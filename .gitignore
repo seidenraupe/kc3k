@@ -6,3 +6,5 @@ dist
 .env.*
 !.env.example
 agent-tools
+kc3k-deploy
+kc3k-deploy.pub
