@@ -5,9 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# GitHub Pages bleibt die Vorschau.
-# Derselbe Build wird per SSH nach Kreativmedia gelegt, sobald die Secrets stehen.
-
 permissions:
   contents: read
   pages: write
@@ -74,13 +71,36 @@ jobs:
           exit "$missing"
 
       - name: Nach Kreativmedia deployen
-        uses: easingthemes/ssh-deploy@v5.1.0
-        with:
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          REMOTE_PORT: ${{ secrets.SSH_PORT || '2121' }}
-          SOURCE: dist/
-          TARGET: ${{ secrets.SSH_TARGET_DIR }}
-          ARGS: "-rlgoDzvc -i --delete"
-          EXCLUDE: "/kc3k-kreativmedia.zip"
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_TARGET_DIR: ${{ secrets.SSH_TARGET_DIR }}
+        run: |
+          set -euo pipefail
+          port=2121
+          target="${SSH_TARGET_DIR%/}"
+          echo "Ziel: ${SSH_USER}@${SSH_HOST}:${port} -> ${target}"
+          if [ "$target" != "/kc3k.ch" ]; then
+            echo "::error title=Falscher Zielordner::SSH_TARGET_DIR muss /kc3k.ch sein (Plesk-Chroot). Aktuell: ${SSH_TARGET_DIR}"
+            exit 1
+          fi
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > "$HOME/.ssh/kc3k_deploy"
+          chmod 600 "$HOME/.ssh/kc3k_deploy"
+          if ! fingerprint=$(ssh-keygen -lf "$HOME/.ssh/kc3k_deploy" 2>&1); then
+            echo "::error title=Schlüssel ungültig::SSH_PRIVATE_KEY ist kein OpenSSH-Privatschlüssel. Erwartet wird kc3k-deploy, Fingerabdruck SHA256:xhyVWVuLaCxWSfEEVOEt05P9npzIOVneOw8JshCzf08"
+            echo "$fingerprint"
+            exit 1
+          fi
+          echo "Schlüssel: $fingerprint"
+          ssh -i "$HOME/.ssh/kc3k_deploy" -p "$port" \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=20 \
+            "${SSH_USER}@${SSH_HOST}" "test -d '$target' && echo ssh-ok"
+          rsync -rlgoDzvc -i --delete \
+            --exclude 'kc3k-kreativmedia.zip' \
+            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
+            dist/ "${SSH_USER}@${SSH_HOST}:${target}/"
