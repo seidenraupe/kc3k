@@ -1,71 +1,51 @@
 # Hosting auf kreativmedia.ch
 
-**Noch nicht einrichten.** Zuerst entscheidet der Vorstand anhand des GitHub-Stands. Die Anleitung bleibt für den Moment danach.
-
-giger-straehl.ch liegt bei KreativMedia und antwortet mit einer Plesk-Standardseite. Dasselbe Panel eignet sich später für kc3k.ch: statische Dateien ins Document-Root, SSL per Let’s Encrypt.
+Die gebaute Website liegt im Document-Root der Domain `kc3k.ch`. Ein Push auf `main` baut `dist/` und kopiert diesen Ordner per SSH dorthin, analog zur HVW-Website bei Hostpoint.
 
 ## Empfohlene Einrichtung
 
-1. In Plesk unter **Websites & Domains** die Domain `kc3k.ch` (oder zuerst `neu.kc3k.ch`) anlegen.
-2. Document-Root: `httpdocs` (Standard).
-3. PHP wird nicht gebraucht. Eine beliebige PHP-Version schadet nicht.
-4. **SSL/TLS**: Let’s Encrypt für `kc3k.ch` und `www.kc3k.ch`, Weiterleitung auf HTTPS.
-5. FTP- oder SSH-Zugang nur für das Deployment, nicht öffentlich dokumentieren.
+1. Domain `kc3k.ch` in Plesk, Document-Root ist der Ordner `kc3k.ch` im Abo (nicht das `httpdocs` einer anderen Domain).
+2. PHP wird nicht gebraucht.
+3. **SSL/TLS**: Let’s Encrypt für `kc3k.ch` und `www.kc3k.ch`.
+4. SSH-Zugriff für den Systembenutzer, siehe unten. Das reine FTP-Konto reicht für Actions nicht.
 
 Die Datei `public/.htaccess` kommt mit dem Build nach `dist/` und aktiviert HTTPS-Redirect, kurze URLs (`/team` → `team.html`), Kompression und Basis-Header.
 
-## Zwei Wege zum Aufschalten
-
-### A. GitHub Actions → FTPS (empfohlen)
-
-Der Build läuft auf GitHub. Nur der Inhalt von `dist/` landet auf dem Server.
-
-Plesk: FTP-Benutzer mit Zugriff auf `httpdocs` anlegen. In GitHub unter *Settings → Secrets and variables → Actions*:
-
-| Secret | Beispiel |
-| --- | --- |
-| `FTP_HOST` | FTP-Host aus Plesk, oft `ftp.ihre-domain.ch` |
-| `FTP_USER` | FTP-Benutzer |
-| `FTP_PASSWORD` | Passwort |
-| `FTP_REMOTE_DIR` | `/httpdocs/` oder `/httpdocs/kc3k/` |
+## Deploy per SSH
 
 Workflow: [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml).
 
-### B. Plesk Git
+GitHub Actions baut die Seite und synchronisiert nur `dist/` auf den Server. Das Zip musst du dafür nicht mehr von Hand hochladen. GitHub Pages läuft parallel als Vorschau weiter.
 
-Unter der Domain **Git** wählen, Remote-URL des GitHub-Repos eintragen, SSH-Key von Plesk bei GitHub hinterlegen.
+Secrets gehören ins Repository **kc3k**, unter *Settings → Secrets and variables → Actions*. Dieselben Namen wie bei der HVW-Website, andere Werte:
 
-Wichtig: Das Repository enthält Quellcode, nicht das fertige `dist/`. Deshalb entweder
+| Secret | Wert für kc3k |
+| --- | --- |
+| `SSH_HOST` | `80.74.151.81` |
+| `SSH_USER` | Systembenutzer des Abos mit Shell, im FTP-Dialog der Benutzer mit Basisverzeichnis `/` (nicht das reine FTP-Konto `kc3k`) |
+| `SSH_TARGET_DIR` | Document-Root von `kc3k.ch`, der Ordner mit der bestehenden `index.html`. Im Abo liegt er als `kc3k.ch`, oft absolut `/var/www/vhosts/<abo>/kc3k.ch` |
+| `SSH_PRIVATE_KEY` | Privater Schlüssel, eine Zeile `-----BEGIN … KEY-----` bis `-----END … KEY-----` |
+| `SSH_PORT` | optional, Standard `22` |
 
-- Actions bauen und in einen `gh-pages`-/`deploy`-Branch nur `dist/` legen, den Plesk zieht, oder
-- auf dem Server per SSH `npm ci && npm run build` ausführen und `dist/` nach `httpdocs` kopieren, falls Node auf dem Tarif vorhanden ist.
+`SSH_TARGET_DIR` darf nicht `/` und nicht das `httpdocs` einer anderen Domain sein. Der Sync löscht im Zielordner Dateien, die nicht mehr im Build sind.
 
-Variante A ist für dieses Hosting robuster.
+### SSH in Plesk einschalten
+
+Auf `80.74.151.81` antwortet Port 22 derzeit nicht. Bevor der erste Action-Lauf durchkommt:
+
+1. Lokal einen Schlüssel erzeugen: `ssh-keygen -t ed25519 -f kc3k-deploy -C "github-actions-kc3k"`.
+2. In Plesk beim Systembenutzer **SSH-Zugriff** auf `/bin/bash` stellen.
+3. Den Inhalt von `kc3k-deploy.pub` als SSH-Schlüssel dieses Benutzers hinterlegen.
+4. Den Inhalt von `kc3k-deploy` (ohne `.pub`) als Secret `SSH_PRIVATE_KEY` speichern. Die private Datei nicht ins Repository legen.
+
+Zusätzliche FTP-Konten wie `kc3k` haben keine Shell. Dafür bleibt der Systembenutzer des Abos.
 
 ## Domain und DNS
 
-Heute:
-
-- **A/NS**: Wix (`185.230.63.x`, `ns14.wixdns.net`)
-- **MX**: `mail.kc3k.ch` — nicht über Wix
-
-Beim Schnitt:
-
-1. Bei SWITCH/Registrar oder im aktuellen DNS die Nameserver **nicht** auf Wix lassen, wenn Mail separat läuft. Besser: DNS zu KreativMedia oder zum Registrar ziehen.
-2. A- und AAAA-Records von `kc3k.ch` und `www` auf die Plesk-IP setzen.
-3. **MX, SPF, DKIM, DMARC unverändert lassen**, solange Mail auf `mail.kc3k.ch` bleibt.
-4. TTL vorher auf 300 senken, nach dem Umzug 24–48 Stunden beobachten.
-5. Wix erst kündigen, wenn die neue Seite unter der Hauptdomain erreichbar ist.
+Die Website-Adresse muss auf `80.74.151.81` zeigen. MX und der A-Record von `mail.kc3k.ch` bleiben auf dem Mailserver. Nameserver, die eine Zone nicht ausliefern, lässt du von Kreativmedia aktivieren oder stellst sie auf den Dienst zurück, in dem die A-Records gepflegt werden.
 
 ## E-Mail
 
 `info@kc3k.ch` bleibt die Vereinsadresse. Das Schnupperformular erzeugt eine `mailto:`-Nachricht dorthin. Ein serverseitiges Formular (PHP `mail()` oder ein kleiner Relay) kann später ergänzt werden, ohne die restliche Seite anzufassen.
 
-## Staging
-
-Solange `kc3k.ch` noch auf Wix zeigt:
-
-- Subdomain `neu.kc3k.ch` auf dem kreativmedia-Account, oder
-- ein Unterordner / eine Extra-Domain im bestehenden Paket.
-
-Preview intern, Go-Live erst nach Vorstandsabnahme.
+Preview intern über GitHub Pages, öffentlich über `kc3k.ch`, sobald die Nameserver die Zone ausliefern.
