@@ -5,8 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Vorschau für den Vorstand über GitHub Pages.
-# Kein Upload nach kreativmedia, bis der Verein das beschlossen hat.
+# GitHub Pages bleibt die Vorschau.
+# Derselbe Build wird per SSH nach Kreativmedia gelegt, sobald die Secrets stehen.
 
 permissions:
   contents: read
@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-kc3k
   cancel-in-progress: true
 
 jobs:
@@ -31,8 +31,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          include-hidden-files: true
 
-  deploy:
+  pages:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -41,3 +46,41 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  kreativmedia:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+
+      - name: Secrets prüfen
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_TARGET_DIR: ${{ secrets.SSH_TARGET_DIR }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          missing=0
+          for name in SSH_HOST SSH_USER SSH_TARGET_DIR SSH_PRIVATE_KEY; do
+            eval "value=\${$name}"
+            if [ -z "$value" ]; then
+              echo "::error title=Secret fehlt::$name ist im Repository nicht gesetzt."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Nach Kreativmedia deployen
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT || '2121' }}
+          SOURCE: dist/
+          TARGET: ${{ secrets.SSH_TARGET_DIR }}
+          ARGS: "-rlgoDzvc -i --delete"
+          EXCLUDE: "/kc3k-kreativmedia.zip"
