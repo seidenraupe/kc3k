@@ -8,7 +8,7 @@ Alle fünf Vereinsfotos der Wix-Startseite sind da, neu auf die Gesichter zugesc
 
 | Wix-Original | Datei hier |
 | --- | --- |
-| Training-313 (Seiza) | `public/media/home/seiza.jpg` (horizontal gespiegelt, Sensei schaut nach links) |
+| Seiza Turnhalle Lind Nord (Hero) | `public/media/home/seiza.jpg` — vordere Sensei-Reihe (5 Personen) |
 | Training-02 | `public/media/home/familie-training.jpg` |
 | Training-03 | `public/media/home/kinder-training.jpg` |
 | Training-247 (fünf Senseis) | `public/media/home/sensei-gruppe.jpg` |
