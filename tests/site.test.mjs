@@ -67,6 +67,9 @@ test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   assert.match(html, /karte-st-georgen\.jpg/);
   assert.match(html, /jka-karate\.ch/);
   assert.match(html, /media\/partner\/jka-karate\.png/);
+  assert.match(html, /partners-grid/);
+  assert.match(html, /partner-name/);
+  assert.match(html, /Ethik-Charta/);
   assert.match(html, /Schnuppertraining/);
   assert.match(html, /stat-label-line[^>]*>Aktiv-/);
   assert.match(html, /stat-label-line[^>]*>Mitglieder/);
