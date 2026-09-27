@@ -17,7 +17,7 @@ Aus der öffentlichen Wix-Seite (Stand August 2026):
 
 - Aktuelle Vorstandsfotos (mit Einverständnis der Abgebildeten)
 - Galeriebilder der letzten Lager und Turniere
-- Offizielle Anmelde-PDFs für Aktiv- und Passivmitglieder
+- Offizielle Anmelde-PDFs für Aktivmitglieder und Gönner
 - Statuten-PDF, falls öffentlich
 - Bestätigung, dass die Drive-Links der 3K-News so bleiben dürfen
 

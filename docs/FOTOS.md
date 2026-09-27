@@ -59,6 +59,6 @@ Nicht auf der öffentlichen Wix-Seite, aber für eine vollständige Migration n�
 
 - Neuere Lager- und Turnierfotos, falls die Google-Alben ersetzt werden sollen
 - Aktuelle Lager- und Turnierfotos der letzten Jahre
-- Offizielle Anmelde-PDFs (Aktiv / Passiv)
+- Offizielle Anmelde-PDFs (Aktiv / Gönner)
 - Statuten-PDF, falls es öffentlich werden soll
 - Neuere Vorstandsfotos, falls das bestehende ersetzt werden soll

@@ -51,6 +51,8 @@ test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   assert.match(html, /Schnuppertraining/);
   assert.match(html, /stat-label-line[^>]*>Aktiv-/);
   assert.match(html, /stat-label-line[^>]*>Mitglieder/);
+  assert.match(html, /stat-label-line[^>]*>Gönner/);
+  assert.doesNotMatch(html, /Passiv/i);
   assert.match(html, /lang="de-CH"/);
 });
 
