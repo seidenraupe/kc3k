@@ -1040,15 +1040,6 @@ address {
     padding-left: 0.65rem;
   }
 
-  .hero-bar .stat-label {
-    font-size: 0.82rem;
-    line-height: 1.15;
-  }
-
-  .hero-bar .stat-label-line {
-    display: block;
-  }
-
   .dojo-split {
     flex-direction: column;
   }
