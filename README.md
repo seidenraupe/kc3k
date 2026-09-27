@@ -24,6 +24,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 | Seite | Inhalt |
 | --- | --- |
 | `index.html` | Start, Dojo, Trainingszeiten |
+| `/upload/` | 3K-News hochladen (PHP, Passwort + 2FA) — [docs/UPLOAD.md](docs/UPLOAD.md) |
 | `infos.html` | Training, Lager, Prüfungen, Sponsoren |
 | `team.html` | Senseis und Vorstand |
 | `leitbild.html` | Philosophie, Beiträge, Familie |

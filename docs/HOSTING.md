@@ -5,7 +5,7 @@ Die gebaute Website liegt im Document-Root der Domain `kc3k.ch`. Ein Push auf `m
 ## Empfohlene Einrichtung
 
 1. Domain `kc3k.ch` in Plesk, Document-Root ist der Ordner `kc3k.ch` im Abo (nicht das `httpdocs` einer anderen Domain).
-2. PHP wird nicht gebraucht.
+2. PHP wird für die statischen Seiten nicht gebraucht, aber für **`/upload/`** (3K-News-Redaktion) muss PHP auf der Domain aktiv sein — siehe [UPLOAD.md](UPLOAD.md).
 3. **SSL/TLS**: Let’s Encrypt für `kc3k.ch` und `www.kc3k.ch`.
 4. SSH-Zugriff für den Systembenutzer, siehe unten. Das reine FTP-Konto reicht für Actions nicht.
 

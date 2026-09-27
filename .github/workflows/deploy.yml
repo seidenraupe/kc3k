@@ -105,5 +105,14 @@ jobs:
             "${SSH_USER}@${SSH_HOST}" "test -d '$target' && echo ssh-ok"
           rsync -rlgoDzvc -i --delete \
             --exclude 'kc3k-kreativmedia.zip' \
+            --exclude 'upload/config.php' \
+            --exclude 'data/news.json' \
+            --exclude 'documents/news/' \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/ "${SSH_USER}@${SSH_HOST}:${target}/"
+          rsync -rlgoDzvc --ignore-existing \
+            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
+            dist/data/news.json "${SSH_USER}@${SSH_HOST}:${target}/data/news.json"
+          rsync -rlgoDzvc --ignore-existing \
+            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
+            dist/upload/config.php "${SSH_USER}@${SSH_HOST}:${target}/upload/config.php"

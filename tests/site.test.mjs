@@ -98,15 +98,29 @@ test("FAQ enthält IBAN und Gründungsdatum", () => {
   assert.match(html, /15\. Januar 2002/);
 });
 
-test("News-Daten sind vollständig", () => {
-  const news = JSON.parse(readFileSync(resolve(root, "src/data/news.json"), "utf8"));
+test("News-Daten sind vollständig und sortierbar", () => {
+  const newsPath = resolve(dist, "data/news.json");
+  assert.ok(existsSync(newsPath), "data/news.json fehlt im Build");
+  const news = JSON.parse(readFileSync(newsPath, "utf8"));
   assert.ok(news.length >= 4);
   for (const item of news) {
     assert.ok(item.title);
     assert.ok(item.date);
+    assert.ok(item.sortDate);
     assert.ok(item.url);
     assert.ok(item.excerpt);
   }
+});
+
+test("News-Seite ohne Redaktions-Hinweis", () => {
+  const html = readFileSync(resolve(dist, "news.html"), "utf8");
+  assert.doesNotMatch(html, /src\/data\/news\.json/);
+  assert.doesNotMatch(html, /Die Ausgaben liegen/);
+});
+
+test("Upload-Bereich ist im Build", () => {
+  assert.ok(existsSync(resolve(dist, "upload/index.php")));
+  assert.ok(existsSync(resolve(dist, "upload/upload.css")));
 });
 
 test("Galerie verlinkt Mehr Fotos und Video", () => {
