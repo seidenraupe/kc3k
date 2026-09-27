@@ -25,6 +25,19 @@ test("Build erzeugt alle Vereinsseiten", () => {
   }
 });
 
+test("Google Analytics ist eingebunden", () => {
+  const html = readFileSync(resolve(dist, "index.html"), "utf8");
+  assert.match(html, /G-GZ3KFSEGLY/);
+  assert.match(html, /googletagmanager\.com\/gtag\/js/);
+});
+
+test("Datenschutz beschreibt Google Analytics", () => {
+  const html = readFileSync(resolve(dist, "datenschutz.html"), "utf8");
+  assert.match(html, /Google Analytics/);
+  assert.match(html, /G-GZ3KFSEGLY/);
+  assert.doesNotMatch(html, /Keine Tracker/);
+});
+
 test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   const html = readFileSync(resolve(dist, "index.html"), "utf8");
   assert.match(html, /Karate-Club 3K/);
