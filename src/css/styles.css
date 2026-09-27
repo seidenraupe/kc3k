@@ -496,6 +496,7 @@ a:hover {
   }
 
   .hero-inner {
+    top: var(--header);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1021,14 +1022,14 @@ address {
 
   .hero-scrim {
     background:
-      linear-gradient(90deg, rgba(15, 36, 48, 0.72) 0%, rgba(15, 36, 48, 0.28) 42%, transparent 68%),
-      linear-gradient(180deg, rgba(15, 36, 48, 0.12) 0%, rgba(15, 36, 48, 0.55) 100%);
+      linear-gradient(180deg, rgba(15, 36, 48, 0.82) 0%, rgba(15, 36, 48, 0.42) 32%, rgba(15, 36, 48, 0.08) 52%),
+      linear-gradient(180deg, rgba(15, 36, 48, 0.08) 0%, rgba(15, 36, 48, 0.55) 100%);
   }
 
   .hero-inner {
-    top: auto;
-    bottom: 0;
-    padding: 3.5rem 0 1.6rem;
+    top: var(--header);
+    bottom: auto;
+    padding: 0.85rem 0 1.25rem;
   }
 
   .hero-bar .stats {
