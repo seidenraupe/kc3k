@@ -67,7 +67,7 @@ function news_add_issue(
         throw new RuntimeException('PDF konnte nicht gespeichert werden.');
     }
     $items = news_read($paths['json']);
-    $allowed = ['news', 'journal', 'turnier'];
+    $allowed = ['news', 'journal'];
     if (!in_array($section, $allowed, true)) {
         $section = 'journal';
     }

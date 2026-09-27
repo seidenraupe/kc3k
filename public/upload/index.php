@@ -232,7 +232,6 @@ if ($step === 'totp' && $loggedIn) {
             <select name="section" required>
               <option value="journal">KC3K-Journal</option>
               <option value="news">News</option>
-              <option value="turnier">Turnier-Berichte</option>
             </select>
           </label>
           <label>

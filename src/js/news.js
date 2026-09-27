@@ -3,7 +3,6 @@ const empty = document.querySelector("[data-news-empty]");
 
 const SECTIONS = [
   { id: "news", title: "News" },
-  { id: "turnier", title: "Turnier-Berichte" },
   { id: "journal", title: "KC3K-Journal" },
 ];
 

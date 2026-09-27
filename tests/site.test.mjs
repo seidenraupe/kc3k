@@ -124,11 +124,11 @@ test("News-Daten sind vollständig und sortierbar", () => {
     assert.ok(item.sortDate);
     assert.ok(item.url);
     assert.ok(item.excerpt);
-    assert.ok(["news", "journal", "turnier"].includes(item.section));
+    assert.ok(["news", "journal"].includes(item.section));
   }
   assert.ok(news.some((item) => item.section === "journal"));
   assert.ok(news.some((item) => item.section === "news"));
-  assert.ok(news.some((item) => item.section === "turnier"));
+  assert.ok(!news.some((item) => item.section === "turnier"));
   assert.ok(news.filter((item) => item.section === "journal").every((item) => !item.image));
 });
 
@@ -136,6 +136,7 @@ test("News-Seite ohne Redaktions-Hinweis", () => {
   const html = readFileSync(resolve(dist, "news.html"), "utf8");
   assert.doesNotMatch(html, /src\/data\/news\.json/);
   assert.doesNotMatch(html, /Die Ausgaben liegen/);
+  assert.doesNotMatch(html, /Turnier-Berichte/);
 });
 
 test("Upload-Bereich ist im Build", () => {
@@ -149,6 +150,11 @@ test("Galerie verlinkt Mehr Fotos und Video", () => {
   assert.match(html, />Video</);
   assert.match(html, /photos\.app\.goo\.gl/);
   assert.match(html, /dropbox\.com\/s\/cvhngxf9kzhfmqs\/Katas\.mp4/);
+  assert.match(html, /Weihnachts-Fest/);
+  assert.doesNotMatch(html, /Jahresfest/i);
+  assert.match(html, /Dagmersellen/);
+  assert.doesNotMatch(html, /Dagmarsellen/);
+  assert.match(html, /1XTZn0BgEmDp8UVPUxcqYLbp0Cdn6kwwD/);
 });
 
 test("Vereinsfotos liegen im Build", () => {
