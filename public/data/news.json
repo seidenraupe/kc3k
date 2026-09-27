@@ -30,7 +30,8 @@
     "excerpt": "Die September-/Oktober-Ausgabe der Vereinszeitung.",
     "url": "https://drive.google.com/file/d/1xus0X9A-TIUwsmrFVPtOyGNFAbz1FExX/view",
     "external": true,
-    "image": "./media/news/lager-2023.jpg"
+    "image": "./media/news/lager-2023.jpg",
+    "imageAlt": "Karate-Lager 2023"
   },
   {
     "title": "3K-News Nr. 88",
