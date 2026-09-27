@@ -3,9 +3,27 @@ DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Kanonische Domain ohne www (Sitemap, Search Console)
+  RewriteCond %{HTTP_HOST} ^www\.kc3k\.ch$ [NC]
+  RewriteRule ^ https://kc3k.ch%{REQUEST_URI} [L,R=301]
+
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # Wix-Alt-URLs (Anhang A)
+  RewriteRule ^blank-page/?$ /faq.html [R=301,L]
+  RewriteRule ^news-1/?$ /infos.html [R=301,L]
+  RewriteRule ^post/.* /news.html [R=301,L]
+  RewriteRule ^_files/.* /news.html [R=301,L]
+
+  # Trailing Slash verursacht sonst Serverfehler 500
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)/$ /$1 [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -31,4 +49,4 @@ DirectoryIndex index.html
   ExpiresByType image/svg+xml "access plus 30 days"
 </IfModule>
 
-ErrorDocument 404 /index.html
+ErrorDocument 404 /404.html

@@ -34,12 +34,12 @@ Aus der öffentlichen Wix-Seite (Stand August 2026):
 | `/blank-page` | `/faq.html` |
 | `/post/…` | News-Karten bzw. PDF |
 
-Nach dem DNS-Schnitt in `.htaccess` ergänzen:
+Die 301-Weiterleitungen, 404-Seite, Canonical-Tags und Sitemap stehen im Repo (`public/.htaccess`, `src/404.html`, `docs/SEO.md`). Kurzfassung:
 
-```
-Redirect 301 /blank-page /faq.html
-Redirect 301 /news-1 /infos.html
-```
+| Wix | Neu |
+| --- | --- |
+| `/post/…` | `/news.html` |
+| `/_files/…` | `/news.html` |
 
 ## Medien
 
@@ -55,6 +55,6 @@ Wix-Originale nicht nach der Kündigung weiter per Hotlink nutzen.
 - [ ] TTL gesenkt
 - [ ] A-Record auf Plesk-IP
 - [ ] `www` und Apex getestet (HTTPS, Formular, News-Links)
-- [ ] Alte Wix-URLs umgeleitet
+- [ ] Alte Wix-URLs umgeleitet (Deploy + `docs/SEO.md` / Search Console)
 - [ ] Suche «Karate Winterthur 3K» stichprobenartig geprüft
 - [ ] Wix-Abo gekündigt, Rechnung als Beleg abgelegt

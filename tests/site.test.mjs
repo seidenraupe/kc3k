@@ -17,6 +17,7 @@ const pages = [
   "anmelden.html",
   "impressum.html",
   "datenschutz.html",
+  "404.html",
 ];
 
 test("Build erzeugt alle Vereinsseiten", () => {
@@ -127,6 +128,26 @@ test("Gebaute Assets nutzen relative Pfade für GitHub Pages", () => {
   assert.match(html, /src="\.\/assets\/[^"]+\.js"/);
   assert.doesNotMatch(html, /href="\/assets\//);
   assert.doesNotMatch(html, /src="\/assets\/logo/);
+});
+
+test("Canonical und Sitemap nutzen kc3k.ch ohne www", () => {
+  const index = readFileSync(resolve(dist, "index.html"), "utf8");
+  assert.match(index, /<link rel="canonical" href="https:\/\/kc3k\.ch\/"/);
+  const sitemap = readFileSync(resolve(dist, "sitemap.xml"), "utf8");
+  assert.match(sitemap, /https:\/\/kc3k\.ch\//);
+  assert.doesNotMatch(sitemap, /www\.kc3k\.ch/);
+  const robots = readFileSync(resolve(dist, "robots.txt"), "utf8");
+  assert.match(robots, /Sitemap: https:\/\/kc3k\.ch\/sitemap\.xml/);
+});
+
+test("404-Seite und htaccess-Weiterleitungen", () => {
+  const notFound = readFileSync(resolve(dist, "404.html"), "utf8");
+  assert.match(notFound, /<base href="\/"/);
+  assert.match(notFound, /Seite nicht gefunden/);
+  const htaccess = readFileSync(resolve(dist, ".htaccess"), "utf8");
+  assert.match(htaccess, /blank-page/);
+  assert.match(htaccess, /news-1/);
+  assert.match(htaccess, /ErrorDocument 404 \/404\.html/);
 });
 
 test("Interne Navigation zeigt auf vorhandene Dateien", () => {

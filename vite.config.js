@@ -15,6 +15,7 @@ const pages = [
   "anmelden",
   "impressum",
   "datenschutz",
+  "404",
 ];
 
 function htmlPartials() {
@@ -38,7 +39,20 @@ function htmlPartials() {
           return source.replaceAll(`<!--partial:${name}-->`, partial);
         };
 
-        return ["head-end", "header", "footer"].reduce(replacePartial, html);
+        let out = ["head-end", "header", "footer"].reduce(replacePartial, html);
+        const canonicalUrl =
+          page === "index"
+            ? "https://kc3k.ch/"
+            : page === "404"
+              ? null
+              : `https://kc3k.ch/${page}.html`;
+        if (canonicalUrl) {
+          out = out.replace(
+            "</head>",
+            `    <link rel="canonical" href="${canonicalUrl}" />\n  </head>`,
+          );
+        }
+        return out;
       },
     },
   };
