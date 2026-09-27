@@ -84,27 +84,8 @@
               Website
               <input name="website" type="text" tabindex="-1" autocomplete="off" />
             </label>
-            <button class="button" type="submit">Anfrage senden</button>
+            <button class="button" type="submit" data-anfrage-submit>Anfrage senden</button>
             <p class="form-status" data-form-status hidden></p>
-            <div class="form-mailto" data-form-mailto hidden>
-              <p class="form-hint">
-                Dein Mailprogramm sollte sich öffnen. Die Anfrage ist
-                <strong>erst gesendet</strong>, wenn du dort auf «Senden» tippst. Deine
-                Eingaben bleiben erhalten.
-              </p>
-              <label>
-                Text zum Kopieren (falls kein Mailprogramm aufgeht)
-                <textarea class="form-copy" data-form-copy readonly rows="10"></textarea>
-              </label>
-              <p class="form-actions-inline">
-                <button class="button button-ghost" type="button" data-form-copy-btn>
-                  Text kopieren
-                </button>
-                <a class="button button-ghost" data-form-mailto-link href="mailto:info@kc3k.ch"
-                  >In Mailprogramm öffnen</a
-                >
-              </p>
-            </div>
           </form>
           <div class="stack">
             <article class="card">

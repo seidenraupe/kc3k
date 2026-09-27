@@ -57,52 +57,8 @@ function setAnfrageMode(form) {
   }
 }
 
-function buildAnfrageMail(data) {
-  const type = String(data.get("type") || "schnupper");
-  const name = String(data.get("name") || "").trim();
-  const email = String(data.get("email") || "").trim();
-  const phone = String(data.get("phone") || "").trim();
-  const message = String(data.get("message") || "").trim();
-
-  if (type === "goenner") {
-    return {
-      subject: "Gönner-Mitgliedschaft KC3K",
-      body: [
-        "Anfrage: Gönner-Mitgliedschaft (Fr. 100.– / Jahr)",
-        "",
-        `Name: ${name}`,
-        `E-Mail: ${email}`,
-        phone ? `Telefon: ${phone}` : null,
-        "",
-        message || "Ich möchte Gönner beim Karate-Club 3K werden.",
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    };
-  }
-
-  const participant = String(data.get("participant") || "").trim();
-  const age = String(data.get("age") || "").trim();
-  const preferred = String(data.get("preferred") || "").trim();
-
-  return {
-    subject: "Schnuppertraining KC3K",
-    body: [
-      "Anfrage: Schnuppertraining",
-      "",
-      `Name (Kontakt): ${name}`,
-      `E-Mail: ${email}`,
-      phone ? `Telefon: ${phone}` : null,
-      participant ? `Für wen: ${participant}` : null,
-      age ? `Alter: ${age} Jahre` : null,
-      preferred ? `Bevorzugter Trainingstag: ${preferred}` : null,
-      "",
-      message || "Ich möchte unverbindlich ein Schnuppertraining besuchen.",
-    ]
-      .filter(Boolean)
-      .join("\n"),
-  };
-}
+const ANFRAGE_SEND_ERROR =
+  'Der Versand hat leider nicht geklappt. Bitte schreib uns direkt an <a href="mailto:info@kc3k.ch">info@kc3k.ch</a> — deine Eingaben bleiben im Formular erhalten.';
 
 function validateAnfrageClient(form, data) {
   const name = String(data.get("name") || "").trim();
@@ -123,36 +79,17 @@ function validateAnfrageClient(form, data) {
   return null;
 }
 
-function showMailtoFallback(form, { subject, body }) {
+function showAnfrageError(form, messageHtml) {
   const status = form.querySelector("[data-form-status]");
-  const mailtoPanel = form.querySelector("[data-form-mailto]");
-  const copyField = form.querySelector("[data-form-copy]");
-  const mailtoLink = form.querySelector("[data-form-mailto-link]");
-  const mailto = `mailto:info@kc3k.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  if (status instanceof HTMLElement) {
-    status.hidden = false;
-    status.dataset.state = "ok";
-    status.innerHTML =
-      "Versand über die Website war nicht möglich. Nutze dein Mailprogramm oder kopiere den Text unten.";
-  }
-  if (copyField instanceof HTMLTextAreaElement) {
-    copyField.value = body;
-  }
-  if (mailtoLink instanceof HTMLAnchorElement) {
-    mailtoLink.href = mailto;
-  }
-  if (mailtoPanel instanceof HTMLElement) {
-    mailtoPanel.hidden = false;
-  }
-  window.location.href = mailto;
+  if (!(status instanceof HTMLElement)) return;
+  status.hidden = false;
+  status.dataset.state = "error";
+  status.innerHTML = messageHtml;
 }
 
 if (anfrageForm instanceof HTMLFormElement) {
   const status = anfrageForm.querySelector("[data-form-status]");
-  const mailtoPanel = anfrageForm.querySelector("[data-form-mailto]");
-  const copyBtn = anfrageForm.querySelector("[data-form-copy-btn]");
-  const copyField = anfrageForm.querySelector("[data-form-copy]");
+  const submitBtn = anfrageForm.querySelector("[data-anfrage-submit]");
 
   anfrageForm.querySelectorAll('input[name="type"]').forEach((input) => {
     input.addEventListener("change", () => setAnfrageMode(anfrageForm));
@@ -167,29 +104,14 @@ if (anfrageForm instanceof HTMLFormElement) {
     }
   }
 
-  copyBtn?.addEventListener("click", async () => {
-    if (!(copyField instanceof HTMLTextAreaElement)) return;
-    try {
-      await navigator.clipboard.writeText(copyField.value);
-      if (copyBtn instanceof HTMLButtonElement) copyBtn.textContent = "Kopiert";
-      window.setTimeout(() => {
-        if (copyBtn instanceof HTMLButtonElement) copyBtn.textContent = "Text kopieren";
-      }, 2000);
-    } catch {
-      copyField.focus();
-      copyField.select();
-    }
-  });
-
   anfrageForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitBtn instanceof HTMLButtonElement && submitBtn.disabled) return;
+
     const data = new FormData(anfrageForm);
     const clientError = validateAnfrageClient(anfrageForm, data);
-    if (clientError && status instanceof HTMLElement) {
-      status.hidden = false;
-      status.dataset.state = "error";
-      status.textContent = clientError;
-      if (mailtoPanel instanceof HTMLElement) mailtoPanel.hidden = true;
+    if (clientError) {
+      showAnfrageError(anfrageForm, clientError);
       return;
     }
 
@@ -197,7 +119,10 @@ if (anfrageForm instanceof HTMLFormElement) {
       status.hidden = true;
       status.textContent = "";
     }
-    if (mailtoPanel instanceof HTMLElement) mailtoPanel.hidden = true;
+    if (submitBtn instanceof HTMLButtonElement) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Wird gesendet …";
+    }
 
     try {
       const response = await fetch("./anfrage/send.php", {
@@ -221,18 +146,19 @@ if (anfrageForm instanceof HTMLFormElement) {
       }
       const serverMsg =
         payload && typeof payload.error === "string" ? payload.error : null;
-      if (serverMsg && status instanceof HTMLElement) {
-        status.hidden = false;
-        status.dataset.state = "error";
-        status.textContent = serverMsg;
+      if (serverMsg) {
+        showAnfrageError(anfrageForm, serverMsg);
         return;
       }
+      showAnfrageError(anfrageForm, ANFRAGE_SEND_ERROR);
     } catch {
-      /* Mailto-Fallback */
+      showAnfrageError(anfrageForm, ANFRAGE_SEND_ERROR);
+    } finally {
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Anfrage senden";
+      }
     }
-
-    const mail = buildAnfrageMail(data);
-    showMailtoFallback(anfrageForm, mail);
   });
 }
 
