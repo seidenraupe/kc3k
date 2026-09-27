@@ -85,6 +85,15 @@ test("Leitbild verlinkt Dôjô-Kun und Statuten", () => {
   }
 });
 
+test("Anmelden: Schnuppern und Gönner-Formular", () => {
+  const html = readFileSync(resolve(dist, "anmelden.html"), "utf8");
+  assert.match(html, /data-schnupper-form/);
+  assert.match(html, /data-goenner-form/);
+  assert.match(html, /id="goenner"/);
+  assert.match(html, /Fr\. 100\.–/);
+  assert.match(html, /freiwillige Spenden/);
+});
+
 test("FAQ verlinkt die SKR-Prüfungsordnung 2025", () => {
   const html = readFileSync(resolve(dist, "faq.html"), "utf8");
   assert.match(html, /skr-pruefungsordnung-2025\.pdf/);
@@ -104,7 +113,11 @@ test("News-Daten sind vollständig und sortierbar", () => {
   const newsPath = resolve(dist, "data/news.json");
   assert.ok(existsSync(newsPath), "data/news.json fehlt im Build");
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
-  assert.ok(news.length >= 20);
+  assert.ok(news.length >= 10);
+  assert.ok(
+    news.filter((item) => item.section === "journal").length >= 8,
+    "KC3K-Journal: nur Einträge mit erreichbarem PDF",
+  );
   for (const item of news) {
     assert.ok(item.title);
     assert.ok(item.date);

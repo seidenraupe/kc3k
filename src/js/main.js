@@ -27,18 +27,18 @@ document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = String(new Date().getFullYear());
 });
 
-const form = document.querySelector("[data-schnupper-form]");
-const status = document.querySelector("[data-form-status]");
+const MAILTO_OK =
+  "Danke. Dein E-Mail-Programm öffnet sich mit der Anfrage an <a href=\"mailto:info@kc3k.ch\">info@kc3k.ch</a>. Falls nichts passiert, schreib uns direkt.";
 
-if (form instanceof HTMLFormElement && status) {
+function bindMailtoForm(form, { subject, buildBody }) {
+  const status = form.querySelector("[data-form-status]");
+  if (!(form instanceof HTMLFormElement) || !status) return;
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
-    const message = String(data.get("message") || "").trim();
-    const preferred = String(data.get("preferred") || "").trim();
 
     if (!name || !email) {
       status.hidden = false;
@@ -47,7 +47,26 @@ if (form instanceof HTMLFormElement && status) {
       return;
     }
 
-    const body = [
+    const body = buildBody(data);
+    const mailto = `mailto:info@kc3k.ch?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    status.hidden = false;
+    status.dataset.state = "ok";
+    status.innerHTML = MAILTO_OK;
+    window.location.href = mailto;
+    form.reset();
+  });
+}
+
+bindMailtoForm(document.querySelector("[data-schnupper-form]"), {
+  subject: "Schnuppertraining KC3K",
+  buildBody(data) {
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    const preferred = String(data.get("preferred") || "").trim();
+
+    return [
       `Name: ${name}`,
       `E-Mail: ${email}`,
       phone ? `Telefon: ${phone}` : null,
@@ -57,16 +76,30 @@ if (form instanceof HTMLFormElement && status) {
     ]
       .filter(Boolean)
       .join("\n");
+  },
+});
 
-    const mailto = `mailto:info@kc3k.ch?subject=${encodeURIComponent("Schnuppertraining KC3K")}&body=${encodeURIComponent(body)}`;
-    status.hidden = false;
-    status.dataset.state = "ok";
-    status.innerHTML =
-      "Danke. Dein E-Mail-Programm öffnet sich mit der Anfrage an <a href=\"mailto:info@kc3k.ch\">info@kc3k.ch</a>. Falls nichts passiert, schreib uns direkt.";
-    window.location.href = mailto;
-    form.reset();
-  });
-}
+bindMailtoForm(document.querySelector("[data-goenner-form]"), {
+  subject: "Gönner-Mitgliedschaft KC3K",
+  buildBody(data) {
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const message = String(data.get("message") || "").trim();
+
+    return [
+      "Anfrage: Gönner-Mitgliedschaft (Fr. 100.– / Jahr)",
+      "",
+      `Name: ${name}`,
+      `E-Mail: ${email}`,
+      phone ? `Telefon: ${phone}` : null,
+      "",
+      message || "Ich möchte Gönner beim Karate-Club 3K werden.",
+    ]
+      .filter(Boolean)
+      .join("\n");
+  },
+});
 
 const copyIban = document.querySelector("[data-copy-iban]");
 if (copyIban) {
