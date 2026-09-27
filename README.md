@@ -28,7 +28,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 | `infos.html` | Training, Lager, Prüfungen, Sponsoren |
 | `team.html` | Senseis und Vorstand |
 | `leitbild.html` | Philosophie, Beiträge, Familie |
-| `news.html` | 3K-News aus `src/data/news.json` |
+| `news.html` | 3K-News aus `public/data/news.json` (Google-Drive-Links) |
 | `galerie.html` | Alben mit Cover, Mehr Fotos und Video |
 | `faq.html` | Beitrag, IBAN, Geschichte |
 | `anmelden.html` | Schnupperanfrage per E-Mail |

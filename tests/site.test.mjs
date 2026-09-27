@@ -102,7 +102,8 @@ test("News-Daten sind vollständig und sortierbar", () => {
   const newsPath = resolve(dist, "data/news.json");
   assert.ok(existsSync(newsPath), "data/news.json fehlt im Build");
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
-  assert.ok(news.length >= 4);
+  assert.ok(news.length >= 20);
+  assert.ok(news.every((item) => item.url.includes("drive.google.com/file/d/")));
   for (const item of news) {
     assert.ok(item.title);
     assert.ok(item.date);
