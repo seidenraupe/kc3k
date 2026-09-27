@@ -705,6 +705,17 @@ a:hover {
   background: var(--paper-3);
 }
 
+.doc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.doc-links a {
+  font-weight: 700;
+}
+
 .partners {
   display: flex;
   flex-wrap: wrap;

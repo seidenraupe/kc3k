@@ -70,9 +70,11 @@ test("Team listet Senseis und Vorstand", () => {
 test("Leitbild verlinkt Dôjô-Kun und Statuten", () => {
   const html = readFileSync(resolve(dist, "leitbild.html"), "utf8");
   assert.match(html, /kc3k-dojo-kun\.pdf/);
+  assert.match(html, /kc3k-ethik-charta\.pdf/);
   assert.match(html, /kc3k-statuten-2025-03-14\.pdf/);
   for (const file of [
     "documents/kc3k-dojo-kun.pdf",
+    "documents/kc3k-ethik-charta.pdf",
     "documents/kc3k-statuten-2025-03-14.pdf",
   ]) {
     assert.ok(existsSync(resolve(dist, file)), `fehlt: ${file}`);
