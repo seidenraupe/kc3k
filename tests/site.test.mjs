@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { test } from "node:test";
 
@@ -31,6 +31,23 @@ test("Google Analytics ist eingebunden", () => {
   assert.match(html, /G-GZ3KFSEGLY/);
   assert.match(html, /googletagmanager\.com\/gtag\/js/);
 });
+
+test("Schriften werden selbst gehostet", () => {
+  const html = readFileSync(resolve(dist, "index.html"), "utf8");
+  assert.doesNotMatch(html, /fonts\.googleapis\.com/);
+  assert.doesNotMatch(html, /fonts\.gstatic\.com/);
+  const css = readFileSync(resolve(dist, "assets", findMainCss()), "utf8");
+  assert.match(css, /Outfit/);
+  assert.match(css, /Source Sans 3/);
+  assert.match(css, /\.woff2/);
+  assert.ok(existsSync(resolve(dist, "fonts/outfit-latin-500-normal.woff2")));
+});
+
+function findMainCss() {
+  const assets = readdirSync(resolve(dist, "assets")).filter((f) => f.startsWith("main-") && f.endsWith(".css"));
+  assert.ok(assets.length >= 1, "main CSS fehlt");
+  return assets[0];
+}
 
 test("Datenschutz beschreibt Google Analytics", () => {
   const html = readFileSync(resolve(dist, "datenschutz.html"), "utf8");

@@ -6,11 +6,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "sync-fonts": "node scripts/sync-fonts.mjs",
+    "build": "npm run sync-fonts && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 43147",
     "test": "node --test tests/*.test.mjs",
     "lint:html": "html-validate dist",
     "check": "npm run build && npm run lint:html && npm test"
+  },
+  "dependencies": {
+    "@fontsource/outfit": "^5.3.0",
+    "@fontsource/source-sans-3": "^5.3.0"
   },
   "devDependencies": {
     "html-validate": "^9.7.1",
