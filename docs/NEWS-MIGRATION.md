@@ -16,4 +16,4 @@ Einzelne Nummern unter 69 waren auf der archivierten Wix-Seite nicht mehr als ei
 node scripts/scrape-wix-news.mjs
 ```
 
-Neue Ausgaben ab Nr. 93 idealerweise über **https://kc3k.ch/upload/** (Redaktion) — der Deploy überschreibt `data/news.json` auf dem Server standardmässig **nicht**. Nach einer kompletten Neu-Migration einmalig per SSH/rsync `dist/data/news.json` auf Kreativmedia kopieren.
+Neue Ausgaben ab Nr. 93 idealerweise über **https://kc3k.ch/upload/** (Redaktion). Jeder GitHub-Deploy aktualisiert `data/news.json` aus dem Repository auf dem Server — Uploads sollten danach ins Repo übernommen werden, damit sie beim nächsten Deploy erhalten bleiben.

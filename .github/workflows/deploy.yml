@@ -110,7 +110,7 @@ jobs:
             --exclude 'documents/news/' \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/ "${SSH_USER}@${SSH_HOST}:${target}/"
-          rsync -rlgoDzvc --ignore-existing \
+          rsync -rlgoDzvc \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/data/news.json "${SSH_USER}@${SSH_HOST}:${target}/data/news.json"
           rsync -rlgoDzvc --ignore-existing \
