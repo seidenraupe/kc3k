@@ -61,7 +61,9 @@ test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   assert.match(html, /Karate-Club 3K/);
   assert.match(html, /Turnhalle Lind Nord/);
   assert.match(html, /St\.-Georgen-Strasse 69/);
-  assert.match(html, /google\.ch\/maps\/place\/St\.-Georgen-Strasse\+69/);
+  assert.match(html, /google\.com\/maps\/search\/\?api=1/);
+  assert.match(html, /query=Turnhalle\+Lind\+Nord/);
+  assert.match(html, /St\.-Georgen-Strasse\+69/);
   assert.match(html, /karte-st-georgen\.jpg/);
   assert.match(html, /jka-karate\.ch/);
   assert.match(html, /media\/partner\/jka-karate\.png/);
