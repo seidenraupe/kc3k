@@ -378,6 +378,14 @@ a:hover {
   object-fit: contain;
 }
 
+.partner-logo-olympic {
+  height: 3.25rem;
+}
+
+.partner-logo-only {
+  padding-inline: 1rem;
+}
+
 .qr {
   width: min(14rem, 100%);
   height: auto;
