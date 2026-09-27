@@ -14,7 +14,7 @@ Alle fünf Vereinsfotos der Wix-Startseite sind da, neu auf die Gesichter zugesc
 | Training-247 (fünf Senseis) | `public/media/home/sensei-gruppe.jpg` |
 | Karate – Giusi – 4 von 25 (Gruppenfoto) | `public/media/home/gruppenfoto.jpg` |
 
-Partnerlogos J+S, SKR und Swiss Olympic sind übernommen. Die Wix-Karten-Grafik «Google Maps» fehlt absichtlich — stattdessen ist eine OpenStreetMap-Karte eingebettet.
+Partnerlogos J+S, SKR und Swiss Olympic sind übernommen. Die Dojo-Karte auf der Startseite ist ein Google-Maps-Screenshot mit Link zur Adresse St.-Georgen-Strasse 69.
 
 ## Team — vollständig
 
