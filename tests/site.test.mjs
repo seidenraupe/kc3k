@@ -50,6 +50,15 @@ test("Team listet Senseis und Vorstand", () => {
   }
 });
 
+test("FAQ verlinkt die SKR-Prüfungsordnung 2025", () => {
+  const html = readFileSync(resolve(dist, "faq.html"), "utf8");
+  assert.match(html, /skr-pruefungsordnung-2025\.pdf/);
+  assert.ok(
+    existsSync(resolve(dist, "documents/skr-pruefungsordnung-2025.pdf")),
+    "SKR-PDF fehlt im Build",
+  );
+});
+
 test("FAQ enthält IBAN und Gründungsdatum", () => {
   const html = readFileSync(resolve(dist, "faq.html"), "utf8");
   assert.match(html, /CH52 0070 0110 0005 4277 8/);
