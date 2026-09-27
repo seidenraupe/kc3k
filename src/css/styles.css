@@ -235,7 +235,8 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
+  /* Sensei-Reihe und Knie im sichtbaren Bereich halten */
+  object-position: 54% 38%;
   border-radius: 0;
 }
 
@@ -881,6 +882,10 @@ address {
     max-height: none;
     aspect-ratio: 980 / 718;
     height: auto;
+  }
+
+  .hero-photo {
+    object-position: 52% 34%;
   }
 
   .hero-scrim {
