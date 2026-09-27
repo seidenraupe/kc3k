@@ -2,10 +2,10 @@
 <html lang="de-CH">
   <head>
     <!--partial:head-end-->
-    <title>Schnuppertraining | Karate-Club 3K Winterthur</title>
+    <title>Anfrage | Karate-Club 3K Winterthur</title>
     <meta
       name="description"
-      content="Unverbindliches Schnuppertraining im Karate-Club 3K Winterthur anmelden."
+      content="Schnuppertraining oder Gönner-Mitgliedschaft beim Karate-Club 3K Winterthur anfragen."
     />
   </head>
   <body>
@@ -15,12 +15,23 @@
         <div class="wrap">
           <p class="kicker">Einstieg</p>
           <h1>Meld dich an</h1>
-          <p>Unverbindliches Schnuppertraining — ohne Abo, ohne Druck.</p>
+          <p>Schnuppertraining oder Gönner-Mitgliedschaft — unverbindlich und ohne Druck.</p>
         </div>
       </section>
       <section class="section">
         <div class="wrap grid-2">
-          <form class="form panel" data-schnupper-form>
+          <form class="form panel" data-anfrage-form>
+            <fieldset class="form-fieldset">
+              <legend>Anliegen</legend>
+              <label class="choice">
+                <input type="radio" name="type" value="schnupper" checked />
+                Schnuppertraining
+              </label>
+              <label class="choice">
+                <input type="radio" name="type" value="goenner" />
+                Gönner-Mitgliedschaft (Fr. 100.– / Jahr)
+              </label>
+            </fieldset>
             <label>
               Name
               <input name="name" type="text" autocomplete="name" required />
@@ -33,21 +44,67 @@
               Telefon
               <input name="phone" type="tel" autocomplete="tel" />
             </label>
-            <label>
-              Bevorzugter Tag
-              <select name="preferred">
-                <option value="">Noch offen</option>
-                <option value="Montag">Montag</option>
-                <option value="Mittwoch">Mittwoch</option>
-                <option value="Freitag">Freitag</option>
-              </select>
-            </label>
+            <div data-anfrage-schnupper>
+              <p class="form-hint">
+                Für die Einteilung in die passende Gruppe brauchen die Senseis Angaben zur
+                Person. Mindestalter: <strong>6 Jahre</strong>.
+              </p>
+              <label>
+                Für wen?
+                <select name="participant" required>
+                  <option value="">Bitte wählen</option>
+                  <option value="Kind">Kind</option>
+                  <option value="Jugendliche/r">Jugendliche/r</option>
+                  <option value="Erwachsene/r">Erwachsene/r</option>
+                </select>
+              </label>
+              <label>
+                Alter (Jahre)
+                <input name="age" type="number" min="6" max="99" inputmode="numeric" required />
+              </label>
+              <label>
+                Bevorzugter Tag
+                <select name="preferred">
+                  <option value="">Noch offen</option>
+                  <option value="Montag">Montag</option>
+                  <option value="Mittwoch">Mittwoch</option>
+                  <option value="Freitag">Freitag</option>
+                </select>
+              </label>
+            </div>
             <label>
               Nachricht
-              <textarea name="message" placeholder="Alter, Vorerfahrung, Fragen zum ersten Training"></textarea>
+              <textarea
+                name="message"
+                data-anfrage-message
+                placeholder="Vorerfahrung, Fragen zum ersten Training"
+              ></textarea>
             </label>
-            <button class="button" type="submit">Anfrage vorbereiten</button>
+            <label class="visually-hidden" aria-hidden="true">
+              Website
+              <input name="website" type="text" tabindex="-1" autocomplete="off" />
+            </label>
+            <button class="button" type="submit">Anfrage senden</button>
             <p class="form-status" data-form-status hidden></p>
+            <div class="form-mailto" data-form-mailto hidden>
+              <p class="form-hint">
+                Dein Mailprogramm sollte sich öffnen. Die Anfrage ist
+                <strong>erst gesendet</strong>, wenn du dort auf «Senden» tippst. Deine
+                Eingaben bleiben erhalten.
+              </p>
+              <label>
+                Text zum Kopieren (falls kein Mailprogramm aufgeht)
+                <textarea class="form-copy" data-form-copy readonly rows="10"></textarea>
+              </label>
+              <p class="form-actions-inline">
+                <button class="button button-ghost" type="button" data-form-copy-btn>
+                  Text kopieren
+                </button>
+                <a class="button button-ghost" data-form-mailto-link href="mailto:info@kc3k.ch"
+                  >In Mailprogramm öffnen</a
+                >
+              </p>
+            </div>
           </form>
           <div class="stack">
             <article class="card">
@@ -70,52 +127,20 @@
               </p>
               <p><a href="mailto:info@kc3k.ch">info@kc3k.ch</a></p>
             </article>
+            <article class="card" id="goenner">
+              <h2>Gönner-Mitgliedschaft</h2>
+              <p>
+                Der Jahresbeitrag beträgt Fr. 100.–. Zusätzliche freiwillige Spenden sind
+                jederzeit möglich und sehr geschätzt — im Formular oder direkt per
+                Überweisung.
+              </p>
+              <p>
+                Gönner erhalten unsere News und werden zu Vereinsanlässen eingeladen. Wähle
+                im Formular «Gönner-Mitgliedschaft».
+              </p>
+              <p><a href="faq.html">Mehr in den FAQ</a></p>
+            </article>
           </div>
-        </div>
-      </section>
-      <section class="section section-alt" id="goenner">
-        <div class="wrap grid-2">
-          <form class="form panel" data-goenner-form>
-            <h2 class="section-title">Gönner-Mitgliedschaft anfragen</h2>
-            <p>
-              Du unterstützt den Verein ohne Training — als Gönner bist du Teil der
-              KC3K-Familie.
-            </p>
-            <label>
-              Name
-              <input name="name" type="text" autocomplete="name" required />
-            </label>
-            <label>
-              E-Mail
-              <input name="email" type="email" autocomplete="email" required />
-            </label>
-            <label>
-              Telefon
-              <input name="phone" type="tel" autocomplete="tel" />
-            </label>
-            <label>
-              Nachricht
-              <textarea
-                name="message"
-                placeholder="Adresse für Rechnung, Fragen oder Hinweis zu einer freiwilligen Spende"
-              ></textarea>
-            </label>
-            <button class="button" type="submit">Anfrage vorbereiten</button>
-            <p class="form-status" data-form-status hidden></p>
-          </form>
-          <article class="card">
-            <h2>Gönner-Mitgliedschaft</h2>
-            <p>
-              Der Jahresbeitrag beträgt Fr. 100.–. Zusätzliche freiwillige Spenden sind
-              jederzeit möglich und sehr geschätzt — im Formular oder direkt per
-              Überweisung.
-            </p>
-            <p>
-              Gönner erhalten unsere News und werden zu Vereinsanlässen eingeladen. Der
-              Vorstand meldet sich nach deiner Anfrage mit den nächsten Schritten.
-            </p>
-            <p><a href="faq.html">Mehr in den FAQ</a></p>
-          </article>
         </div>
       </section>
     </main>

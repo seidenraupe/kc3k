@@ -85,13 +85,16 @@ test("Leitbild verlinkt Dôjô-Kun und Statuten", () => {
   }
 });
 
-test("Anmelden: Schnuppern und Gönner-Formular", () => {
+test("Anmelden: ein Formular für Schnuppern und Gönner", () => {
   const html = readFileSync(resolve(dist, "anmelden.html"), "utf8");
-  assert.match(html, /data-schnupper-form/);
-  assert.match(html, /data-goenner-form/);
+  assert.match(html, /data-anfrage-form/);
+  assert.doesNotMatch(html, /data-goenner-form/);
   assert.match(html, /id="goenner"/);
   assert.match(html, /Fr\. 100\.–/);
-  assert.match(html, /freiwillige Spenden/);
+  assert.match(html, /Mindestalter.*6 Jahre/);
+  assert.match(html, /Für wen\?/);
+  assert.match(html, /Jugendliche\/r/);
+  assert.ok(existsSync(resolve(dist, "anfrage/send.php")));
 });
 
 test("FAQ verlinkt die SKR-Prüfungsordnung 2025", () => {
