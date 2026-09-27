@@ -132,6 +132,8 @@ test("FAQ enthält IBAN und Gründungsdatum", () => {
   const html = readFileSync(resolve(dist, "faq.html"), "utf8");
   assert.match(html, /CH52 0070 0110 0005 4277 8/);
   assert.match(html, /15\. Januar 2002/);
+  assert.match(html, /Lizenzmarke Fr\. 70\.–/);
+  assert.match(html, /Eintrittsgebühr.*Fr\. 60\.–/);
 });
 
 test("News-Daten sind vollständig und sortierbar", () => {
