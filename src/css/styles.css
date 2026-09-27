@@ -917,6 +917,20 @@ address {
   padding-top: 1.5rem;
 }
 
+.news-rubric + .news-rubric {
+  margin-top: 2.75rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.news-rubric .section-head {
+  margin-bottom: 1.1rem;
+}
+
+.news-rubric .news-grid {
+  margin-top: 0;
+}
+
 .note {
   padding: 0.85rem 1rem;
   border-left: 3px solid var(--gold);

@@ -5,7 +5,8 @@
     "sortDate": "2026-04-29",
     "excerpt": "Die aktuelle Vereinszeitung mit Terminen, Berichten und allem, was im Club gerade läuft.",
     "url": "https://drive.google.com/file/d/1DlSf79GwGyD7eACszIheOITRPlSHYRBs/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 91",
@@ -13,7 +14,8 @@
     "sortDate": "2026-02-06",
     "excerpt": "Rückblick und Ausblick aus dem Dojo — zum Lesen und Weitergeben.",
     "url": "https://drive.google.com/file/d/1TpO1F1vdjwZ8LdA66PsJ_2yvD4cekO0S/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 90",
@@ -21,7 +23,8 @@
     "sortDate": "2025-11-28",
     "excerpt": "Herbstausgabe der 3K-News mit Vereinsinfos und kommenden Anlässen.",
     "url": "https://drive.google.com/file/d/1N3inRXSWOOQkeiUnL4XdEdOfr3vpFSDy/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 89",
@@ -30,8 +33,7 @@
     "excerpt": "Die September-/Oktober-Ausgabe der Vereinszeitung.",
     "url": "https://drive.google.com/file/d/1xus0X9A-TIUwsmrFVPtOyGNFAbz1FExX/view",
     "external": true,
-    "image": "./media/news/lager-2023.jpg",
-    "imageAlt": "Karate-Lager 2023"
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 88",
@@ -39,7 +41,8 @@
     "sortDate": "2025-04-22",
     "excerpt": "Link zu den News",
     "url": "https://drive.google.com/file/d/1PdbjqbmroO5xGILXeQA7bG6uQ3EAhunF/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 87",
@@ -47,7 +50,19 @@
     "sortDate": "2025-01-24",
     "excerpt": "Link zu den News",
     "url": "https://drive.google.com/file/d/1eGfZW91JB6h0hI5CPgmH-6d5T46vZziQ/view",
-    "external": true
+    "external": true,
+    "section": "journal"
+  },
+  {
+    "section": "turnier",
+    "title": "Herbst-Turnier",
+    "date": "19. Dezember 2024",
+    "sortDate": "2024-12-19",
+    "excerpt": "Bericht vom Herbstturnier — PDF auf Google Drive.",
+    "url": "https://drive.google.com/file/d/1XTZn0BgEmDp8UVPUxcqYLbp0Cdn6kwwD/view",
+    "external": true,
+    "image": "./media/galerie/herbstturnier-2018.jpg",
+    "imageAlt": "Herbstturnier SKR"
   },
   {
     "title": "3K-News Nr. 86",
@@ -55,7 +70,8 @@
     "sortDate": "2024-12-17",
     "excerpt": "Hier der Link zu den 3K News Nr. 86",
     "url": "https://drive.google.com/file/d/1rttV4YXhnB6G9UM9m1CFsB7pC_711DUw/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 85",
@@ -63,7 +79,8 @@
     "sortDate": "2024-09-23",
     "excerpt": "Hier der Link zu den News",
     "url": "https://drive.google.com/file/d/1_RuNr1LXnJ6dOgn2fqVb875RNNhs6ueb/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 84",
@@ -71,7 +88,8 @@
     "sortDate": "2024-03-29",
     "excerpt": "Hier der Link zu den neusten News",
     "url": "https://drive.google.com/file/d/1q0ucqFNcVxMpHwnQS0_PBB_4IHamNuHF/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 83",
@@ -79,7 +97,8 @@
     "sortDate": "2024-01-22",
     "excerpt": "Hier der Link zu den neusten News",
     "url": "https://drive.google.com/file/d/1TDgDzRDhY7ZMBTr3RFWW7M8-B28m0DcG/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 82",
@@ -87,7 +106,8 @@
     "sortDate": "2023-11-24",
     "excerpt": "Link zu den News anklicken",
     "url": "https://drive.google.com/file/d/1rzglC-C31OVqslSaJE5YVYB1VV_V1MTN/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 81",
@@ -95,7 +115,30 @@
     "sortDate": "2023-10-12",
     "excerpt": "Hier Euer Link zu den News. Schöne Herbstferien allen.",
     "url": "https://drive.google.com/file/d/1NWMNqiY8WJycdBHN3mNTwJe66sqc0zAX/view",
-    "external": true
+    "external": true,
+    "section": "journal"
+  },
+  {
+    "section": "news",
+    "title": "Karate-Lager 2023",
+    "date": "21. Juni 2023",
+    "sortDate": "2023-06-21",
+    "excerpt": "Rückblick aufs Sommerlager — weitere Fotos in der Galerie.",
+    "url": "galerie.html",
+    "external": false,
+    "image": "./media/news/lager-2023.jpg",
+    "imageAlt": "Karate-Lager 2023"
+  },
+  {
+    "section": "news",
+    "title": "Gratulation zum 4. Dan",
+    "date": "13. April 2023",
+    "sortDate": "2023-04-13",
+    "excerpt": "Senseis Giovanni Miraglia und André Zuraikat haben die Prüfung zum 4. Dan JKA bestanden. Die Prüfung nahm Shihan Ogura persönlich ab.",
+    "url": "team.html",
+    "external": false,
+    "image": "./media/news/4-dan.jpg",
+    "imageAlt": "Senseis Giovanni Miraglia und André Zuraikat nach der 4.-Dan-Prüfung"
   },
   {
     "title": "3K-News Nr. 80",
@@ -103,7 +146,8 @@
     "sortDate": "2023-03-30",
     "excerpt": "Link zu den News",
     "url": "https://drive.google.com/file/d/1cj4r_3fnRIbAy4dMbB_GOiVrCqQckFmF/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 79",
@@ -111,7 +155,8 @@
     "sortDate": "2023-01-17",
     "excerpt": "Hier der Link zu den News",
     "url": "https://drive.google.com/file/d/1TxoyZN5wyL7ir1XMtZ2ZAefbYhXq6RXR/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 78",
@@ -119,7 +164,8 @@
     "sortDate": "2022-12-03",
     "excerpt": "Link zu den News",
     "url": "https://drive.google.com/file/d/1vXA1QXnYK0Nmul8qaZZyP9Pidv4H3erd/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 77",
@@ -127,7 +173,8 @@
     "sortDate": "2022-05-30",
     "excerpt": "Link zu den News",
     "url": "https://drive.google.com/file/d/1qEV5jIase7expw2zw7AhiU6fD2DBHKJX/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 76",
@@ -135,7 +182,8 @@
     "sortDate": "2022-01-27",
     "excerpt": "Hier alle News für unseren Verein link",
     "url": "https://drive.google.com/file/d/16JQ2K0h6FjtSBBDNV-CXzPXGFpiIt3T5/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 75",
@@ -143,7 +191,8 @@
     "sortDate": "2021-10-06",
     "excerpt": "Link",
     "url": "https://drive.google.com/file/d/1GBpPjO-Z3X1qBXSYD1WgKVChmm51quVR/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 74",
@@ -151,7 +200,8 @@
     "sortDate": "2021-04-09",
     "excerpt": "Hier kannst Du die News runterladen: link",
     "url": "https://drive.google.com/file/d/12EQ_gm_CRrUxf9HpVhTu4Bh7x_j1GI-w/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 69–72",
@@ -159,7 +209,8 @@
     "sortDate": "2021-02-13",
     "excerpt": "Nr. 69 Nr. 71 Nr. 72",
     "url": "https://drive.google.com/file/d/1CJkPQU1EWEmYMrcfzyrof2oNd9RIxv8P/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Nr. 73",
@@ -167,7 +218,8 @@
     "sortDate": "2020-12-30",
     "excerpt": "Allen einen guten Start ins 2021! Hier die neusten News: Link",
     "url": "https://drive.google.com/file/d/18ma8qU12oleLNb8WDBu8X4oAQOb2lnvO/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Februar 2020",
@@ -175,7 +227,8 @@
     "sortDate": "2020-02-18",
     "excerpt": "link",
     "url": "https://drive.google.com/file/d/1ldU7kcO1Dow1MJzaDkMLWKlcHVveAC96/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News Januar 2020",
@@ -183,7 +236,8 @@
     "sortDate": "2020-01-12",
     "excerpt": "Infos",
     "url": "https://drive.google.com/file/d/1oBvknrQTTGM21ffoqdiC9H57uiwhepFL/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News September 2019",
@@ -191,7 +245,8 @@
     "sortDate": "2019-09-16",
     "excerpt": "link",
     "url": "https://drive.google.com/file/d/1cHJPBB_iPudRGhX01NHl3NScibpG_I11/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   },
   {
     "title": "3K-News (Archiv)",
@@ -199,6 +254,7 @@
     "sortDate": "2019-04-09",
     "excerpt": "Link",
     "url": "https://drive.google.com/file/d/1j_VzMWq-4dhip78wkIR5PoUVDVfKY34d/view",
-    "external": true
+    "external": true,
+    "section": "journal"
   }
 ]

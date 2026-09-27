@@ -103,14 +103,18 @@ test("News-Daten sind vollständig und sortierbar", () => {
   assert.ok(existsSync(newsPath), "data/news.json fehlt im Build");
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
   assert.ok(news.length >= 20);
-  assert.ok(news.every((item) => item.url.includes("drive.google.com/file/d/")));
   for (const item of news) {
     assert.ok(item.title);
     assert.ok(item.date);
     assert.ok(item.sortDate);
     assert.ok(item.url);
     assert.ok(item.excerpt);
+    assert.ok(["news", "journal", "turnier"].includes(item.section));
   }
+  assert.ok(news.some((item) => item.section === "journal"));
+  assert.ok(news.some((item) => item.section === "news"));
+  assert.ok(news.some((item) => item.section === "turnier"));
+  assert.ok(news.filter((item) => item.section === "journal").every((item) => !item.image));
 });
 
 test("News-Seite ohne Redaktions-Hinweis", () => {

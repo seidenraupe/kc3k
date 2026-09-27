@@ -51,6 +51,7 @@ function news_add_issue(
     string $dateLabel,
     string $sortDate,
     string $excerpt,
+    string $section,
     string $tmpPdfPath,
     string $originalName,
 ): array {
@@ -66,6 +67,10 @@ function news_add_issue(
         throw new RuntimeException('PDF konnte nicht gespeichert werden.');
     }
     $items = news_read($paths['json']);
+    $allowed = ['news', 'journal', 'turnier'];
+    if (!in_array($section, $allowed, true)) {
+        $section = 'journal';
+    }
     array_unshift($items, [
         'title' => $title,
         'date' => $dateLabel,
@@ -73,6 +78,7 @@ function news_add_issue(
         'excerpt' => $excerpt,
         'url' => './documents/news/' . $filename,
         'external' => false,
+        'section' => $section,
     ]);
     news_write($paths['json'], $items);
     return ['filename' => $filename, 'count' => count($items)];

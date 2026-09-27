@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dateLabel = trim((string) ($_POST['date_label'] ?? ''));
             $sortDate = trim((string) ($_POST['sort_date'] ?? ''));
             $excerpt = trim((string) ($_POST['excerpt'] ?? ''));
+            $section = trim((string) ($_POST['section'] ?? 'journal'));
             if ($title === '' || $dateLabel === '' || $sortDate === '' || $excerpt === '') {
                 throw new RuntimeException('Bitte alle Felder ausfüllen.');
             }
@@ -119,6 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dateLabel,
                 $sortDate,
                 $excerpt,
+                $section,
                 (string) $file['tmp_name'],
                 (string) ($file['name'] ?? 'news.pdf'),
             );
@@ -224,6 +226,14 @@ if ($step === 'totp' && $loggedIn) {
           <label>
             Kurztext
             <textarea name="excerpt" rows="3" required></textarea>
+          </label>
+          <label>
+            Rubrik
+            <select name="section" required>
+              <option value="journal">KC3K-Journal</option>
+              <option value="news">News</option>
+              <option value="turnier">Turnier-Berichte</option>
+            </select>
           </label>
           <label>
             PDF-Ausgabe

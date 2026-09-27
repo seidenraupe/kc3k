@@ -174,6 +174,7 @@ const newsItems = all.map((item) => {
     excerpt: copy.excerpt || item.excerpt.slice(0, 240),
     url: item.url,
     external: item.url.includes("drive.google.com"),
+    section: "journal",
   };
   if (copy.image) entry.image = copy.image;
   if (item.slug === "gratulation-zum-4-dan") {
