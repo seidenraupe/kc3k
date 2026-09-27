@@ -43,7 +43,7 @@ test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   const html = readFileSync(resolve(dist, "index.html"), "utf8");
   assert.match(html, /Karate-Club 3K/);
   assert.match(html, /Turnhalle Lind Nord/);
-  assert.match(html, /St\. Georgenstrasse 69/);
+  assert.match(html, /St\.-Georgen-Strasse 69/);
   assert.match(html, /google\.ch\/maps\/place\/St\.-Georgen-Strasse\+69/);
   assert.match(html, /karte-st-georgen\.jpg/);
   assert.match(html, /jka-karate\.ch/);
