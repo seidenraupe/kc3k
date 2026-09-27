@@ -444,6 +444,12 @@ a:hover {
   margin-top: 0.85rem;
 }
 
+@media (min-width: 921px) and (max-width: 1200px) {
+  .hero-photo {
+    object-position: 44% 42%;
+  }
+}
+
 @media (min-width: 921px) {
   .hero-scrim {
     background:
@@ -877,10 +883,15 @@ address {
 
   .hero {
     align-items: end;
-    min-height: 22rem;
+    min-height: 0;
     max-height: none;
-    aspect-ratio: 980 / 718;
+    /* Gleiches Seitenverhältnis wie seiza.jpg: seitlich nichts abschneiden */
+    aspect-ratio: 2400 / 1349;
     height: auto;
+  }
+
+  .hero-photo {
+    object-position: 50% 46%;
   }
 
   .hero-scrim {
