@@ -1017,19 +1017,23 @@ address {
   }
 
   .hero-photo {
-    object-position: 50% 46%;
+    object-position: 50% 38%;
   }
 
   .hero-scrim {
     background:
-      linear-gradient(180deg, rgba(15, 36, 48, 0.82) 0%, rgba(15, 36, 48, 0.42) 32%, rgba(15, 36, 48, 0.08) 52%),
-      linear-gradient(180deg, rgba(15, 36, 48, 0.08) 0%, rgba(15, 36, 48, 0.55) 100%);
+      linear-gradient(90deg, rgba(15, 36, 48, 0.68) 0%, rgba(15, 36, 48, 0.22) 45%, transparent 72%),
+      linear-gradient(180deg, rgba(15, 36, 48, 0.06) 0%, rgba(15, 36, 48, 0.72) 100%);
   }
 
   .hero-inner {
-    top: var(--header);
-    bottom: auto;
-    padding: 0.85rem 0 1.25rem;
+    top: auto;
+    bottom: 0;
+    padding: 2.25rem 0 1.35rem;
+  }
+
+  .hero h1 {
+    max-width: 16ch;
   }
 
   .hero-bar .stats {
