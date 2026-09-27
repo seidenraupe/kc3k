@@ -528,6 +528,15 @@ a:hover {
   color: var(--muted);
 }
 
+.stat-label {
+  display: inline-block;
+  line-height: 1.25;
+}
+
+.stat-label-line {
+  display: block;
+}
+
 .page-hero {
   padding: 3.2rem 0 2.4rem;
   background:
@@ -924,6 +933,20 @@ address {
 
   .hero-bar .stats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .hero-bar .stat {
+    padding-left: 0.65rem;
+  }
+
+  .hero-bar .stat-label {
+    font-size: 0.82rem;
+    line-height: 1.15;
+  }
+
+  .hero-bar .stat-label-line {
+    display: block;
   }
 
   .dojo-split {

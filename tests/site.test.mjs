@@ -47,6 +47,8 @@ test("Startseite enthält Verein, Dojo und Call-to-Action", () => {
   assert.match(html, /google\.ch\/maps\/place\/St\.-Georgen-Strasse\+69/);
   assert.match(html, /karte-st-georgen\.jpg/);
   assert.match(html, /Schnuppertraining/);
+  assert.match(html, /stat-label-line[^>]*>Aktiv-/);
+  assert.match(html, /stat-label-line[^>]*>Mitglieder/);
   assert.match(html, /lang="de-CH"/);
 });
 
