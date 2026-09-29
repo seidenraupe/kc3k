@@ -142,8 +142,13 @@ test("News-Daten sind vollständig und sortierbar", () => {
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
   assert.ok(news.length >= 10);
   assert.ok(
-    news.filter((item) => item.section === "journal").length >= 8,
+    news.filter((item) => item.section === "journal").length >= 9,
     "KC3K-Journal: nur Einträge mit erreichbarem PDF",
+  );
+  assert.ok(news.some((item) => item.title === "3K-News Nr. 93"));
+  assert.ok(
+    existsSync(resolve(dist, "documents/news/3k-news-nr-93-2026-09-29.pdf")),
+    "KC3K-News Nr. 93 PDF fehlt im Build",
   );
   for (const item of news) {
     assert.ok(item.title);
