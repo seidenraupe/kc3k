@@ -1,5 +1,4 @@
 {
-  "name": "KC3K Website",
   "install": "npm ci",
   "start": "bash .cursor/start.sh"
 }
