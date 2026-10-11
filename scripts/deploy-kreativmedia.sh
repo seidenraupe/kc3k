@@ -4,7 +4,14 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DIST="$ROOT/dist"
-KEY="${KC3K_DEPLOY_KEY:-$HOME/.ssh/kc3k-deploy}"
+if [ -n "${KC3K_SSH_PRIVATE_KEY:-}" ]; then
+  install -d -m 700 "$HOME/.ssh"
+  KEY="$HOME/.ssh/kc3k_deploy_from_env"
+  printf '%s\n' "$KC3K_SSH_PRIVATE_KEY" | tr -d '\r' > "$KEY"
+  chmod 600 "$KEY"
+else
+  KEY="${KC3K_DEPLOY_KEY:-$HOME/.ssh/kc3k-deploy}"
+fi
 HOST="${KC3K_SSH_HOST:-80.74.151.81}"
 USER="${KC3K_SSH_USER:-giger}"
 TARGET="${KC3K_SSH_TARGET:-/kc3k.ch}"

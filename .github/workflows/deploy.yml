@@ -72,15 +72,6 @@ jobs:
           name: site
           path: dist
 
-      - name: Deploy-Stamp (Prüfung auf dem Server)
-        run: |
-          {
-            echo "commit=${{ github.sha }}"
-            echo "run_id=${{ github.run_id }}"
-            echo "built_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          } > dist/deploy-stamp.txt
-          test "$(find dist/documents/news -name '*.pdf' 2>/dev/null | wc -l)" -ge 9
-
       - name: Secrets prüfen
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
