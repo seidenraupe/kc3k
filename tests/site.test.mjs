@@ -172,6 +172,16 @@ test("News-Seite ohne Redaktions-Hinweis", () => {
   assert.doesNotMatch(html, /Turnier-Berichte/);
 });
 
+test("News-JavaScript ohne Google-Drive im KC3K-Journal", () => {
+  const assetsDir = resolve(dist, "assets");
+  const newsJs = readdirSync(assetsDir).find((name) => /^news-.*\.js$/.test(name));
+  assert.ok(newsJs, "news.js-Bundle fehlt");
+  const bundle = readFileSync(resolve(assetsDir, newsJs), "utf8");
+  assert.match(bundle, /3K-News Nr\. 93/);
+  assert.match(bundle, /3k-news-nr-93-2026-09-29\.pdf/);
+  assert.doesNotMatch(bundle, /url:"https:\/\/drive\.google/);
+});
+
 test("Upload-Bereich ist im Build", () => {
   assert.ok(existsSync(resolve(dist, "upload/index.php")));
   assert.ok(existsSync(resolve(dist, "upload/upload.css")));

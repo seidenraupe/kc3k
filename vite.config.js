@@ -2,7 +2,9 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
-const root = resolve(import.meta.dirname, "src");
+const repoRoot = resolve(import.meta.dirname);
+const root = resolve(repoRoot, "src");
+const newsDataPath = resolve(repoRoot, "public/data/news.json");
 
 const pages = [
   "index",
@@ -62,7 +64,12 @@ export default defineConfig({
   root,
   // Relativ, damit GitHub Pages unter /kc3k/ und später kc3k.ch in der Wurzel funktionieren.
   base: "./",
-  publicDir: resolve(import.meta.dirname, "public"),
+  publicDir: resolve(repoRoot, "public"),
+  resolve: {
+    alias: {
+      "@news-data": newsDataPath,
+    },
+  },
   plugins: [htmlPartials()],
   server: {
     host: "127.0.0.1",

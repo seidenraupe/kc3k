@@ -15,7 +15,9 @@ Die Datei `public/.htaccess` kommt mit dem Build nach `dist/` und aktiviert HTTP
 
 Workflow: [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml).
 
-GitHub Actions baut die Seite und synchronisiert nur `dist/` auf den Server. Das Zip musst du dafür nicht mehr von Hand hochladen. GitHub Pages läuft parallel als Vorschau weiter.
+GitHub Actions baut die Seite und synchronisiert **`dist/` inkl. `data/news.json` und `documents/news/*.pdf`** auf den Server. Früher ausgeschlossene Pfade führten dazu, dass auf kc3k.ch weiterhin Google-Drive-Links und fehlende PDFs lagen. GitHub Pages läuft parallel als Vorschau.
+
+Falls der Workflow-Job **kreativmedia** fehlschlägt (Secrets fehlen): lokal `npm run build` und `./scripts/deploy-kreativmedia.sh` mit dem Schlüssel `kc3k-deploy`.
 
 Secrets gehören ins Repository **kc3k**, unter *Settings → Secrets and variables → Actions*. Dieselben Namen wie bei der HVW-Website, andere Werte:
 

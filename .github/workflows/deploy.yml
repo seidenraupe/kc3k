@@ -106,16 +106,18 @@ jobs:
           rsync -rlgoDzvc -i --delete \
             --exclude 'kc3k-kreativmedia.zip' \
             --exclude 'upload/config.php' \
-            --exclude 'data/news.json' \
-            --exclude 'documents/news/' \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/ "${SSH_USER}@${SSH_HOST}:${target}/"
-          rsync -rlgoDzvc \
-            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
-            dist/data/news.json "${SSH_USER}@${SSH_HOST}:${target}/data/news.json"
-          rsync -rlgoDzvc \
-            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
-            dist/documents/news/ "${SSH_USER}@${SSH_HOST}:${target}/documents/news/"
           rsync -rlgoDzvc --ignore-existing \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/upload/config.php "${SSH_USER}@${SSH_HOST}:${target}/upload/config.php"
+
+      - name: Live-Check News und PDFs
+        run: |
+          set -euo pipefail
+          json=$(curl -fsSL "https://kc3k.ch/data/news.json")
+          echo "$json" | grep -q '"3K-News Nr. 93"'
+          echo "$json" | grep -q './documents/news/3k-news-nr-92-2026-04-29.pdf'
+          ! echo "$json" | grep -q 'drive.google.com'
+          curl -fsSI "https://kc3k.ch/documents/news/3k-news-nr-93-2026-09-29.pdf" | grep -qi '^HTTP/.* 200'
+          curl -fsSI "https://kc3k.ch/documents/news/3k-news-nr-92-2026-04-29.pdf" | grep -qi '^HTTP/.* 200'

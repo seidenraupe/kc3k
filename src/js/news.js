@@ -1,3 +1,5 @@
+import newsItems from "@news-data";
+
 const root = document.querySelector("[data-news-root]");
 const empty = document.querySelector("[data-news-empty]");
 
@@ -6,21 +8,9 @@ const SECTIONS = [
   { id: "news", title: "News" },
 ];
 
-function driveFileId(url) {
-  const match = String(url).match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
-  return match?.[1] ?? null;
-}
-
 function newsImageSrc(item) {
   if (item.section === "journal") return null;
-  if (item.image) return item.image;
-  if (item.external) {
-    const id = driveFileId(item.url);
-    if (id) {
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
-    }
-  }
-  return null;
+  return item.image || null;
 }
 
 function sortNews(items) {
@@ -113,22 +103,9 @@ function renderNews(items) {
   if (!any && empty) empty.hidden = false;
 }
 
-async function loadNews() {
+function loadNews() {
   if (!root) return;
-  try {
-    const response = await fetch(`./data/news.json?v=${Date.now()}`, {
-      cache: "no-store",
-    });
-    if (!response.ok) throw new Error(String(response.status));
-    const items = await response.json();
-    renderNews(items);
-  } catch {
-    if (empty) {
-      empty.hidden = false;
-      empty.textContent =
-        "News konnten gerade nicht geladen werden. Bitte später erneut versuchen.";
-    }
-  }
+  renderNews(newsItems);
 }
 
 loadNews();

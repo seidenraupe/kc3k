@@ -31,4 +31,4 @@ Passwort ändern: neuen bcrypt-Hash erzeugen (`password_hash` in PHP) und in `co
 2. 6-stelliger Code aus der Authenticator-App  
 3. Titel, Anzeige-Datum, Sortierdatum (ISO), Kurztext, PDF → **Veröffentlichen**
 
-Die News-Seite lädt `./data/news.json` zur Laufzeit und sortiert clientseitig absteigend nach `sortDate`.
+Die News-Seite wird beim Build mit `public/data/news.json` gebündelt. Nach einem Upload auf dem Server einen Deploy auslösen (Push auf `main`), damit Links und PDFs auf kc3k.ch übereinstimmen.
