@@ -36,8 +36,10 @@ Der Deploy nutzt dieselben Secret-Namen wie die HVW-Website bei Hostpoint. Angel
 1. Lokal `npm run dev`.
 2. Text oder News-Eintrag ändern.
 3. `npm run check`.
-4. Commit und Push auf `main`.
-5. Commit und Push auf `main`. Actions legt die Seite auf GitHub Pages und nach Kreativmedia.
+4. Commit und Push auf `main` im Repository **seidenraupe/kc3k** (nicht nur im Cursor-Agent).
+5. Actions legt die Seite auf GitHub Pages und nach Kreativmedia.
+
+Wenn Agent und GitHub auseinanderlaufen: [GITHUB-SYNC.md](GITHUB-SYNC.md).
 
 ## News ergänzen
 

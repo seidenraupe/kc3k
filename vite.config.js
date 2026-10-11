@@ -1,4 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
+import { execSync } from "node:child_process";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
@@ -60,6 +61,21 @@ function htmlPartials() {
   };
 }
 
+function buildVersion() {
+  return {
+    name: "build-version",
+    closeBundle() {
+      let sha = "unknown";
+      try {
+        sha = execSync("git rev-parse --short HEAD", { cwd: repoRoot }).toString().trim();
+      } catch {
+        // ignore
+      }
+      writeFileSync(resolve(repoRoot, "dist/version.txt"), `${sha}\n`);
+    },
+  };
+}
+
 export default defineConfig({
   root,
   // Relativ, damit GitHub Pages unter /kc3k/ und später kc3k.ch in der Wurzel funktionieren.
@@ -70,7 +86,7 @@ export default defineConfig({
       "@news-data": newsDataPath,
     },
   },
-  plugins: [htmlPartials()],
+  plugins: [htmlPartials(), buildVersion()],
   server: {
     host: "127.0.0.1",
     port: 43147,
@@ -82,7 +98,7 @@ export default defineConfig({
     strictPort: true,
   },
   build: {
-    outDir: resolve(import.meta.dirname, "dist"),
+    outDir: resolve(repoRoot, "dist"),
     emptyOutDir: true,
     rollupOptions: {
       input: Object.fromEntries(

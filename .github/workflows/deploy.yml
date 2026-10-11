@@ -113,8 +113,17 @@ jobs:
             dist/upload/config.php "${SSH_USER}@${SSH_HOST}:${target}/upload/config.php"
 
       - name: Live-Check News und PDFs
+        env:
+          GITHUB_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
+          expected="${GITHUB_SHA:0:7}"
+          deployed=$(curl -fsSL "https://kc3k.ch/version.txt" | tr -d '\n\r')
+          echo "Live version.txt: ${deployed:-<leer>}, erwartet: $expected"
+          if [ "$deployed" != "$expected" ]; then
+            echo "::error title=Veralteter Live-Stand::kc3k.ch zeigt Commit $deployed, gebaut wurde $expected. Ist GitHub main auf dem neuesten Stand?"
+            exit 1
+          fi
           json=$(curl -fsSL "https://kc3k.ch/data/news.json")
           echo "$json" | grep -q '"3K-News Nr. 93"'
           echo "$json" | grep -q './documents/news/3k-news-nr-92-2026-04-29.pdf'

@@ -1,0 +1,31 @@
+# GitHub-Repository `seidenraupe/kc3k` synchronisieren
+
+Der Deployment-Workflow auf GitHub baut **nur den Stand von `main` auf github.com/seidenraupe/kc3k**.
+
+Wenn der Cloud-Agent (Cursor) weiter ist als GitHub, ist der Workflow trotzdem **grün** — es wird dann ein **älterer Commit** ausgerollt (z. B. `80e2f47`). Symptome auf kc3k.ch:
+
+- News-Seite lädt noch `news-CHcbKTKs.js` (altes Bundle mit Laufzeit-`news.json`)
+- Nr. 92+ verlinken auf Google Drive
+- PDF unter `/documents/news/3k-news-nr-93-…` liefert **404**
+
+## Einmalig: Agent-Stand nach GitHub holen
+
+Im lokalen Klon von **https://github.com/seidenraupe/kc3k**:
+
+```bash
+git remote add cursor-agent https://origin.cursor.com/git/thomas-giger/tmp-db38e0d395290f50.git
+git fetch cursor-agent main
+git merge cursor-agent/main   # oder: git reset --hard cursor-agent/main
+git push origin main
+```
+
+Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`).
+
+## Erfolg prüfen
+
+- https://kc3k.ch/version.txt — muss zum Commit des Laufs passen (z. B. `cc37a02`)
+- https://kc3k.ch/data/news.json — **keine** `drive.google.com`-URLs
+- https://kc3k.ch/documents/news/3k-news-nr-93-2026-09-29.pdf — **HTTP 200**
+- https://kc3k.ch/news.html — Klick auf Nr. 92 öffnet die PDF auf kc3k.ch
+
+Der Job **kreativmedia** schlägt absichtlich fehl, wenn Live-Stand oder PDFs nicht stimmen (ab dem Commit mit `version.txt`-Check).

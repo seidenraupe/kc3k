@@ -20,6 +20,13 @@ const pages = [
   "404.html",
 ];
 
+test("Build schreibt version.txt für Live-Deploy-Check", () => {
+  const versionPath = resolve(dist, "version.txt");
+  assert.ok(existsSync(versionPath), "version.txt fehlt im Build");
+  const sha = readFileSync(versionPath, "utf8").trim();
+  assert.match(sha, /^[0-9a-f]{7,40}$/);
+});
+
 test("Build erzeugt alle Vereinsseiten", () => {
   for (const page of pages) {
     assert.ok(existsSync(resolve(dist, page)), `fehlt: ${page}`);
