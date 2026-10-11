@@ -19,9 +19,28 @@ git merge cursor-agent/main   # oder: git reset --hard cursor-agent/main
 git push origin main
 ```
 
-**Stand zum Sync (Agent → GitHub):** Commits `7585b9b` (SSH-Secret-Hinweis), `47c6886` / `958ce83` (Cloud Environment `start`), auf Agent-`main` ab `acea8e6`.
+**Stand zum Sync (Agent → GitHub):** Commits `7585b9b` (SSH-Secret-Hinweis), `47c6886` / `958ce83` (Cloud Environment `start`), `45c7c76` (Doku), ggf. neuer auf Agent-`main`.
 
-Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`).
+### Variante A — lokal (empfohlen)
+
+Im Klon von **https://github.com/seidenraupe/kc3k**:
+
+```bash
+git remote add cursor-agent https://origin.cursor.com/git/thomas-giger/tmp-db38e0d395290f50.git
+git fetch cursor-agent main
+git merge --ff-only cursor-agent/main
+git push origin main
+```
+
+(Für `fetch` ggf. Cursor-Git-Zugangsdaten verwenden.)
+
+### Variante B — GitHub Action (nach einmaligem Einspielen dieser Workflow-Datei)
+
+1. Secret **`CURSOR_AGENT_GIT_URL`**: Cursor-Git-URL inkl. Token (Lesezugriff auf das Agent-Repo).
+2. **Actions → Sync from Cursor Agent → Run workflow**
+3. Anschließend läuft bei Push auf `main` automatisch **Deployment**.
+
+Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`), falls kein Push-Deploy ausgelöst wurde.
 
 ## Erfolg prüfen
 

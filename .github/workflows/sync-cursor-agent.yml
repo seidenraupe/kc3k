@@ -1,0 +1,36 @@
+# Einmalig oder bei Bedarf: Agent-Stand (Cursor Git) nach GitHub main holen.
+# Voraussetzung: Secret CURSOR_AGENT_GIT_URL mit Lese-Recht, z. B.
+# https://x-access-token:<TOKEN>@origin.cursor.com/git/thomas-giger/tmp-db38e0d395290f50.git
+
+name: Sync from Cursor Agent
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cursor main holen und fast-forward
+        env:
+          CURSOR_AGENT_GIT_URL: ${{ secrets.CURSOR_AGENT_GIT_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CURSOR_AGENT_GIT_URL:-}" ]; then
+            echo "::error title=Secret fehlt::CURSOR_AGENT_GIT_URL ist nicht gesetzt (Cursor Git-URL inkl. Token)."
+            exit 1
+          fi
+          git remote add cursor-agent "$CURSOR_AGENT_GIT_URL"
+          git fetch cursor-agent main
+          git merge --ff-only cursor-agent/main
+          echo "Neuer Stand: $(git rev-parse --short HEAD)"
+
+      - name: main pushen
+        run: git push origin main
