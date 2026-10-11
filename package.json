@@ -11,7 +11,8 @@
     "preview": "vite preview --host 127.0.0.1 --port 43147",
     "test": "node --test tests/*.test.mjs",
     "lint:html": "html-validate dist",
-    "check": "npm run build && npm run lint:html && npm test"
+    "check": "npm run build && npm run lint:html && npm test",
+    "mirror-journal": "node scripts/mirror-journal-pdfs.mjs"
   },
   "dependencies": {
     "@fontsource/outfit": "^5.3.0",

@@ -141,15 +141,16 @@ test("News-Daten sind vollständig und sortierbar", () => {
   assert.ok(existsSync(newsPath), "data/news.json fehlt im Build");
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
   assert.ok(news.length >= 10);
-  assert.ok(
-    news.filter((item) => item.section === "journal").length >= 25,
-    "KC3K-Journal: Vereinszeitungs-Archiv",
-  );
+  const journal = news.filter((item) => item.section === "journal");
+  assert.ok(journal.length >= 9, "KC3K-Journal: Ausgaben 85–93");
   assert.ok(news.some((item) => item.title === "3K-News Nr. 93"));
-  assert.ok(
-    existsSync(resolve(dist, "documents/news/3k-news-nr-93-2026-09-29.pdf")),
-    "KC3K-News Nr. 93 PDF fehlt im Build",
-  );
+  for (const item of journal) {
+    assert.match(item.url, /^\.\/documents\/news\/.+\.pdf$/);
+    assert.equal(item.external, false);
+    const pdfPath = resolve(dist, item.url.replace(/^\.\//, ""));
+    assert.ok(existsSync(pdfPath), `PDF fehlt im Build: ${item.url}`);
+    assert.doesNotMatch(item.url, /drive\.google/);
+  }
   for (const item of news) {
     assert.ok(item.title);
     assert.ok(item.date);

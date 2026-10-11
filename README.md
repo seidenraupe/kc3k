@@ -28,7 +28,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 | `infos.html` | Training, Lager, Prüfungen, Sponsoren |
 | `team.html` | Senseis und Vorstand |
 | `leitbild.html` | Philosophie, Beiträge, Familie |
-| `news.html` | 3K-News aus `public/data/news.json` (Google-Drive-Links) |
+| `news.html` | KC3K-Journal und News aus `public/data/news.json` (PDFs unter `documents/news/`) |
 | `galerie.html` | Alben mit Cover, Mehr Fotos und Video |
 | `faq.html` | Beitrag, IBAN, Geschichte |
 | `anmelden.html` | Schnupperanfrage per E-Mail |
@@ -37,7 +37,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 ## Inhalte ändern
 
 - Texte stehen in den HTML-Dateien unter `src/`.
-- Eine neue Vereinszeitung: Eintrag in `src/data/news.json` ergänzen.
+- Eine neue Vereinszeitung: PDF nach `public/documents/news/`, Eintrag in `public/data/news.json` (oder `/upload/`).
 - Kopf- und Fusszeile: `src/partials/`.
 - Erscheinungsbild: `src/css/styles.css`.
 

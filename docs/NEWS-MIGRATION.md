@@ -1,6 +1,6 @@
 # KC3K-News von Wix übernommen
 
-Die Liste in `public/data/news.json` wurde aus den öffentlichen Wix-Beiträgen (`/post/…`) über die [Wayback Machine](https://web.archive.org/) rekonstruiert — PDF-Links zeigen auf **Google Drive** wie auf der alten Seite.
+Die Liste in `public/data/news.json` wurde aus den öffentlichen Wix-Beiträgen (`/post/…`) über die [Wayback Machine](https://web.archive.org/) rekonstruiert. **Journal-PDFs liegen auf dem Webserver** unter `documents/news/` (nicht mehr auf Google Drive).
 
 ## Umfang
 
@@ -16,4 +16,6 @@ Einzelne Nummern unter 69 waren auf der archivierten Wix-Seite nicht mehr als ei
 node scripts/scrape-wix-news.mjs
 ```
 
-Neue Ausgaben ab Nr. 93 idealerweise über **https://kc3k.ch/upload/** (Redaktion). Jeder GitHub-Deploy aktualisiert `data/news.json` aus dem Repository auf dem Server — Uploads sollten danach ins Repo übernommen werden, damit sie beim nächsten Deploy erhalten bleiben.
+Neue Ausgaben über **https://kc3k.ch/upload/** (Redaktion) oder PDF in `public/documents/news/` ablegen und Eintrag in `news.json` ergänzen. Deploy überträgt `data/news.json` und alle PDFs aus dem Repository.
+
+Ausgaben **älter als Nr. 85** waren auf Google Drive nicht mehr erreichbar und sind aus der öffentlichen Liste entfernt, bis die Redaktion die PDFs erneut hochlädt (`npm run mirror-journal` spiegelt optional noch erreichbare Drive-Links).
