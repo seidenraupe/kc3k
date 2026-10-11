@@ -1,9 +1,5 @@
 {
+  "name": "KC3K Website",
   "install": "npm ci",
-  "terminals": [
-    {
-      "name": "vite",
-      "command": "npm run dev"
-    }
-  ]
+  "start": "bash .cursor/start.sh"
 }
