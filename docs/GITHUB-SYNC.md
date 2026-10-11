@@ -28,4 +28,6 @@ Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`).
 - https://kc3k.ch/documents/news/3k-news-nr-93-2026-09-29.pdf — **HTTP 200**
 - https://kc3k.ch/news.html — Klick auf Nr. 92 öffnet die PDF auf kc3k.ch
 
-Der Job **kreativmedia** schlägt absichtlich fehl, wenn Live-Stand oder PDFs nicht stimmen (ab dem Commit mit `version.txt`-Check).
+Der Job **kreativmedia** prüft per SSH, ob `deploy-stamp.txt`, `version.txt` und mindestens 9 PDFs **auf dem Server** liegen, und vergleicht das `news.html`-Bundle mit dem Build. Schlägt das fehl, landet nichts im Plesk-Ordner — siehe [PLESK-MANUAL-DEPLOY.md](PLESK-MANUAL-DEPLOY.md).
+
+Wenn der Workflow bei dir **grün** bleibt, obwohl Plesk unverändert ist: du deployest vermutlich noch einen **alten Commit** (ohne diese Checks) — `main` muss zuerst synchronisiert werden.

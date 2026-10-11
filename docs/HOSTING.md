@@ -19,6 +19,8 @@ GitHub Actions baut die Seite und synchronisiert **`dist/` inkl. `data/news.json
 
 Falls der Workflow-Job **kreativmedia** fehlschlägt (Secrets fehlen): lokal `npm run build` und `./scripts/deploy-kreativmedia.sh` mit dem Schlüssel `kc3k-deploy`.
 
+Wenn Actions grün sind, im Plesk-Ordner **kc3k.ch** aber keine neuen Dateien erscheinen: [PLESK-MANUAL-DEPLOY.md](PLESK-MANUAL-DEPLOY.md) (Document Root, ZIP-Artifact, `deploy-stamp.txt`).
+
 Secrets gehören ins Repository **kc3k**, unter *Settings → Secrets and variables → Actions*. Dieselben Namen wie bei der HVW-Website, andere Werte:
 
 | Secret | Wert für kc3k |

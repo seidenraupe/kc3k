@@ -28,6 +28,18 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Deploy-Stamp ins Build
+        run: |
+          {
+            echo "commit=${{ github.sha }}"
+            echo "run_id=${{ github.run_id }}"
+            echo "built_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } >> dist/deploy-stamp.txt
+          test "$(find dist/documents/news -name '*.pdf' | wc -l)" -ge 9
+      - name: ZIP für manuelles Plesk-Deploy
+        run: |
+          (cd dist && zip -r ../kc3k-dist.zip .)
+          ls -lh kc3k-dist.zip
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -36,6 +48,10 @@ jobs:
           name: site
           path: dist
           include-hidden-files: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kc3k-dist-zip
+          path: kc3k-dist.zip
 
   pages:
     needs: build
@@ -55,6 +71,15 @@ jobs:
         with:
           name: site
           path: dist
+
+      - name: Deploy-Stamp (Prüfung auf dem Server)
+        run: |
+          {
+            echo "commit=${{ github.sha }}"
+            echo "run_id=${{ github.run_id }}"
+            echo "built_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > dist/deploy-stamp.txt
+          test "$(find dist/documents/news -name '*.pdf' 2>/dev/null | wc -l)" -ge 9
 
       - name: Secrets prüfen
         env:
@@ -111,6 +136,12 @@ jobs:
           rsync -rlgoDzvc --ignore-existing \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/upload/config.php "${SSH_USER}@${SSH_HOST}:${target}/upload/config.php"
+          expected_news=$(grep -oE 'assets/news-[^"]+\.js' dist/news.html | head -1)
+          echo "Erwartetes news-Bundle im Build: ${expected_news}"
+          ssh -i "$HOME/.ssh/kc3k_deploy" -p "$port" \
+            -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
+            "${SSH_USER}@${SSH_HOST}" \
+            "set -e; test -f '${target}/deploy-stamp.txt'; test -f '${target}/version.txt'; pdfs=\$(find '${target}/documents/news' -name '*.pdf' 2>/dev/null | wc -l); test \"\$pdfs\" -ge 9; echo \"PDFs auf Server: \$pdfs\"; cat '${target}/deploy-stamp.txt'; on_server=\$(grep -oE 'assets/news-[^\"]+\\.js' '${target}/news.html' | head -1); echo \"news.html auf Server: \$on_server\"; test \"\$on_server\" = '${expected_news}'"
 
       - name: Live-Check News und PDFs
         env:
