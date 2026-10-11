@@ -20,8 +20,8 @@ In der Authenticator-App Konto «KC3K Upload» anlegen (otpauth-Link erscheint a
 ## Konfiguration auf dem Server
 
 - `upload/config.php` — Zugänge und TOTP-Secrets. Wird beim Deploy **nicht** überschrieben, sobald die Datei auf dem Server liegt.
-- `data/news.json` — News-Liste für die öffentliche Seite (wird beim Deploy nicht überschrieben).
-- `documents/news/` — hochgeladene PDFs (wird beim Deploy nicht gelöscht).
+- `data/news.json` — News-Liste für die öffentliche Seite (wird beim Deploy aus dem Repository aktualisiert).
+- `documents/news/` — hochgeladene PDFs; neue PDFs aus dem Repository werden beim Deploy ergänzt (`--ignore-existing`), bestehende Uploads bleiben erhalten.
 
 Passwort ändern: neuen bcrypt-Hash erzeugen (`password_hash` in PHP) und in `config.php` eintragen.
 

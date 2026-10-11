@@ -115,4 +115,7 @@ jobs:
             dist/data/news.json "${SSH_USER}@${SSH_HOST}:${target}/data/news.json"
           rsync -rlgoDzvc --ignore-existing \
             -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
+            dist/documents/news/ "${SSH_USER}@${SSH_HOST}:${target}/documents/news/"
+          rsync -rlgoDzvc --ignore-existing \
+            -e "ssh -i $HOME/.ssh/kc3k_deploy -p $port -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new" \
             dist/upload/config.php "${SSH_USER}@${SSH_HOST}:${target}/upload/config.php"

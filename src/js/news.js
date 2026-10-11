@@ -2,8 +2,8 @@ const root = document.querySelector("[data-news-root]");
 const empty = document.querySelector("[data-news-empty]");
 
 const SECTIONS = [
-  { id: "news", title: "News" },
   { id: "journal", title: "KC3K-Journal" },
+  { id: "news", title: "News" },
 ];
 
 function driveFileId(url) {
@@ -91,6 +91,9 @@ function renderNews(items) {
 
     const block = document.createElement("section");
     block.className = "news-rubric";
+    if (section.id === "journal") {
+      block.id = "kc3k-journal";
+    }
 
     const head = document.createElement("div");
     head.className = "section-head";

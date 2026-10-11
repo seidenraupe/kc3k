@@ -142,8 +142,8 @@ test("News-Daten sind vollständig und sortierbar", () => {
   const news = JSON.parse(readFileSync(newsPath, "utf8"));
   assert.ok(news.length >= 10);
   assert.ok(
-    news.filter((item) => item.section === "journal").length >= 9,
-    "KC3K-Journal: nur Einträge mit erreichbarem PDF",
+    news.filter((item) => item.section === "journal").length >= 25,
+    "KC3K-Journal: Vereinszeitungs-Archiv",
   );
   assert.ok(news.some((item) => item.title === "3K-News Nr. 93"));
   assert.ok(
