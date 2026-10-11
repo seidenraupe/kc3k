@@ -8,3 +8,5 @@ dist
 agent-tools
 kc3k-deploy
 kc3k-deploy.pub
+kc3k/
+*.bundle
