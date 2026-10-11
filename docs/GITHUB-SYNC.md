@@ -19,6 +19,8 @@ git merge cursor-agent/main   # oder: git reset --hard cursor-agent/main
 git push origin main
 ```
 
+**Stand zum Sync (Agent → GitHub):** Commits `7585b9b` (SSH-Secret-Hinweis), `47c6886` / `958ce83` (Cloud Environment `start`), auf Agent-`main` ab `acea8e6`.
+
 Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`).
 
 ## Erfolg prüfen
