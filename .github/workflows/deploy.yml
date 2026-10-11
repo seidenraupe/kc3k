@@ -105,14 +105,26 @@ jobs:
             exit 1
           fi
           install -d -m 700 "$HOME/.ssh"
-          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > "$HOME/.ssh/kc3k_deploy"
-          chmod 600 "$HOME/.ssh/kc3k_deploy"
-          if ! fingerprint=$(ssh-keygen -lf "$HOME/.ssh/kc3k_deploy" 2>&1); then
-            echo "::error title=Schlüssel ungültig::SSH_PRIVATE_KEY ist kein OpenSSH-Privatschlüssel. Erwartet wird kc3k-deploy, Fingerabdruck SHA256:xhyVWVuLaCxWSfEEVOEt05P9npzIOVneOw8JshCzf08"
+          keyfile="$HOME/.ssh/kc3k_deploy"
+          tr -d '\r' <<< "$SSH_PRIVATE_KEY" > "$keyfile"
+          chmod 600 "$keyfile"
+          if grep -qE '^(ssh-ed25519|ssh-rsa|ecdsa-sha2)' "$keyfile" && ! grep -q 'PRIVATE KEY' "$keyfile"; then
+            echo "::error title=Falscher Schlüsseltyp::In SSH_PRIVATE_KEY steht vermutlich der öffentliche Schlüssel (.pub). Bitte die Datei kc3k-deploy ohne .pub einfügen."
+            exit 1
+          fi
+          if ! fingerprint=$(ssh-keygen -lf "$keyfile" 2>&1); then
+            echo "::error title=Schlüssel ungültig::SSH_PRIVATE_KEY ist kein gültiger OpenSSH-Privatschlüssel (BEGIN OPENSSH PRIVATE KEY). Mehrzeilig in GitHub Secrets einfügen, ohne Anführungszeichen."
             echo "$fingerprint"
+            head -n 1 "$keyfile" || true
             exit 1
           fi
           echo "Schlüssel: $fingerprint"
+          ssh -i "$HOME/.ssh/kc3k_deploy" -p "$port" \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=20 \
+            "${SSH_USER}@${SSH_HOST}" "set -e; for d in '$target' /httpdocs /httpsdocs; do if [ -d \"\$d\" ]; then echo \"ORDNER \$d:\"; ls -la \"\$d/index.html\" \"\$d/news.html\" 2>/dev/null || true; fi; done"
           ssh -i "$HOME/.ssh/kc3k_deploy" -p "$port" \
             -o IdentitiesOnly=yes \
             -o BatchMode=yes \

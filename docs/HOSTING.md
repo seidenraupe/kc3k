@@ -41,7 +41,11 @@ Auf `80.74.151.81` ist SSH über Port **2121** erreichbar (OpenSSH). Port 22 ist
 1. Lokal einen Schlüssel erzeugen: `ssh-keygen -t ed25519 -f kc3k-deploy -C "github-actions-kc3k"`.
 2. In Plesk beim Benutzer `giger` den SSH-Zugriff eingeschaltet lassen. Die Chroot-Shell bleibt, der Website-Ordner heißt dort `/kc3k.ch`.
 3. Den Inhalt von `kc3k-deploy.pub` als SSH-Schlüssel dieses Benutzers hinterlegen.
-4. Den Inhalt von `kc3k-deploy` (ohne `.pub`) als Secret `SSH_PRIVATE_KEY` speichern. Die private Datei nicht ins Repository legen.
+4. Den **privaten** Schlüssel in GitHub unter **Settings → Secrets → Actions → `SSH_PRIVATE_KEY`** speichern:
+   - Inhalt der Datei **`kc3k-deploy`** (ohne `.pub`), komplett von `-----BEGIN OPENSSH PRIVATE KEY-----` bis `-----END OPENSSH PRIVATE KEY-----`.
+   - **Nicht** den Inhalt von `kc3k-deploy.pub` (eine Zeile mit `ssh-ed25519 AAAA…`).
+   - Lokal prüfen: `ssh-keygen -lf kc3k-deploy` (muss den Fingerabdruck anzeigen, kein Fehler).
+   - Nach einem **neuen** Schlüsselpaar ändert sich der Fingerabdruck; wichtig ist nur, dass derselbe `.pub`-Schlüssel in Plesk bei `giger` liegt.
 
 Zusätzliche FTP-Konten wie `kc3k` haben keine Shell. Dafür bleibt der Systembenutzer des Abos.
 
