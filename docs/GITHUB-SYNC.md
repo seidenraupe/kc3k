@@ -56,11 +56,38 @@ Test in einer **neuen Agent-Nachricht** (Secret wird oft erst beim Start der VM 
 ./scripts/test-github-pat.sh
 ```
 
-### Variante B — GitHub Action (nach einmaligem Einspielen dieser Workflow-Datei)
+### Variante B — GitHub Action „Sync from Cursor Agent“
 
-1. Secret **`CURSOR_AGENT_GIT_URL`**: Cursor-Git-URL inkl. Token (Lesezugriff auf das Agent-Repo).
-2. **Actions → Sync from Cursor Agent → Run workflow**
-3. Anschließend läuft bei Push auf `main` automatisch **Deployment**.
+Der Fehler **„Secret fehlt: CURSOR_AGENT_GIT_URL“** bedeutet: auf **GitHub** fehlt dieses Secret — **nicht** `GITHUB_PAT` und **nicht** das Cloud-Agent-Environment.
+
+#### Schritt 1: Secret auf GitHub anlegen
+
+1. Öffne **https://github.com/seidenraupe/kc3k/settings/secrets/actions**
+2. **New repository secret**
+3. **Name (exakt):** `CURSOR_AGENT_GIT_URL`
+4. **Secret:** eine Zeile, Cursor-Git-URL **mit Lese-Token**, z. B.:
+
+   ```text
+   https://x-access-token:<DEIN_CURSOR_GIT_TOKEN>@origin.cursor.com/git/thomas-giger/tmp-db38e0d395290f50.git
+   ```
+
+   Den Token bekommst du in Cursor (nicht GitHub): Projekt **Kc3k.ch website konzept** → Git/Clone-URL mit Token, oder die authentifizierte Remote-URL aus einem lokalen Cursor-Klon. **Nur Lesezugriff** reicht für `git fetch`.
+
+5. Speichern.
+
+#### Schritt 2: Workflow starten
+
+**Actions → Sync from Cursor Agent → Run workflow** (Branch `main`).
+
+Bei Erfolg: `git push origin main` im Job → danach startet **Deployment** automatisch.
+
+#### Zwei verschiedene Secrets (nicht verwechseln)
+
+| Secret | Wo | Zweck |
+| --- | --- | --- |
+| **`CURSOR_AGENT_GIT_URL`** | **GitHub** → Repository Secrets | Action holt Code von Cursor Git |
+| **`GITHUB_PAT`** | **Cursor** → Environment → Runtime secrets | Agent pusht selbst nach GitHub |
+| **`SSH_PRIVATE_KEY`** usw. | **GitHub** → Repository Secrets | Deploy nach Kreativmedia |
 
 Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`), falls kein Push-Deploy ausgelöst wurde.
 

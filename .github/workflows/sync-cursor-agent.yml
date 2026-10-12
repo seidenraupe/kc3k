@@ -24,7 +24,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${CURSOR_AGENT_GIT_URL:-}" ]; then
-            echo "::error title=Secret fehlt::CURSOR_AGENT_GIT_URL ist nicht gesetzt (Cursor Git-URL inkl. Token)."
+            echo "::error title=Secret fehlt::CURSOR_AGENT_GIT_URL fehlt in GitHub (Settings → Secrets and variables → Actions). Wert: https://x-access-token:<TOKEN>@origin.cursor.com/git/thomas-giger/tmp-db38e0d395290f50.git — siehe docs/GITHUB-SYNC.md. (GITHUB_PAT im Cursor-Environment ist ein anderes Secret.)"
             exit 1
           fi
           git remote add cursor-agent "$CURSOR_AGENT_GIT_URL"
