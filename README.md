@@ -46,6 +46,7 @@ npm run preview  # Produktionsbuild lokal ansehen
 - [Konzept](docs/KONZEPT.md) — Warum HTML, Architektur, Kosten
 - [Hosting](docs/HOSTING.md) — kreativmedia / Plesk, Domain, Mail
 - [GitHub](docs/GITHUB.md) — Tests, Pages, Deployment für den Vorstand
+- [Secrets & Sync](docs/SECRETS-UND-SYNC.md) — Keys/Secrets Desktop → GitHub → Kreativmedia
 - [Migration](docs/MIGRATION.md) — Schnitt von Wix nach kc3k.ch
 - [Fotos](docs/FOTOS.md) — welche Wix-Bilder schon da sind und was noch fehlt
 
