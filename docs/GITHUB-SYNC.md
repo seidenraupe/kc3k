@@ -42,6 +42,28 @@ git push origin main
 
 Danach in GitHub **Actions → Deployment → Run workflow** (Branch `main`), falls kein Push-Deploy ausgelöst wurde.
 
+### Prüfen, ob GitHub wirklich aktualisiert wurde
+
+Deploy rollt **nur** den Stand von **github.com/seidenraupe/kc3k** aus. Wenn Kreativmedia weiter `acea8e6` in `version.txt` zeigt, obwohl du „sync“ gemacht hast, liegt `main` auf GitHub oft **noch** auf `acea8e6`.
+
+**GitHub (öffentlich):**
+
+```bash
+curl -fsSL "https://api.github.com/repos/seidenraupe/kc3k/commits/main" | grep -o '"sha": "[^"]*"' | head -1
+```
+
+Muss zum lokalen `git rev-parse HEAD` passen (z. B. `de07265…`), nicht `acea8e6…`.
+
+**Lokal vor `git push`:**
+
+```bash
+git remote -v          # push-Ziel muss github.com/seidenraupe/kc3k sein
+git log -1 --oneline   # z. B. de07265, nicht acea8e6
+git push origin main   # Ausgabe: main -> main (kein „rejected“, kein stiller Fehler)
+```
+
+**Cursor-`fetch` ohne Login:** schlägt oft fehl (401). Dann Cursor-Git-URL **mit Token** als Remote nutzen oder Variante B (Action + Secret `CURSOR_AGENT_GIT_URL`) **einmal** per „Add file“ auf GitHub die Workflow-Datei `.github/workflows/sync-cursor-agent.yml` aus dem Agent-Repo übernehmen, Secret setzen, Workflow starten.
+
 ## Erfolg prüfen
 
 - https://kc3k.ch/version.txt — muss zum Commit des Laufs passen (z. B. `cc37a02`)
