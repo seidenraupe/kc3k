@@ -1,5 +1,7 @@
 # GitHub-Repository `seidenraupe/kc3k` synchronisieren
 
+**Vollständige Secret-Checkliste (Desktop → GitHub → Live):** [SECRETS-UND-SYNC.md](SECRETS-UND-SYNC.md)
+
 Der Deployment-Workflow auf GitHub baut **nur den Stand von `main` auf github.com/seidenraupe/kc3k**.
 
 Wenn der Cloud-Agent (Cursor) weiter ist als GitHub, ist der Workflow trotzdem **grün** — es wird dann ein **älterer Commit** ausgerollt (z. B. `80e2f47`). Symptome auf kc3k.ch:
