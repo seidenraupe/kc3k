@@ -38,6 +38,18 @@ git push origin main
 
 Für Push vom Agent nach GitHub: im **Cloud-Agent-Environment** (Dashboard → Environments → Runtime secrets) Secret **`GITHUB_PAT`** setzen — **nicht** nur unter GitHub Repository Secrets.
 
+#### Projekt „Kc3k.ch website konzept“
+
+| Rolle | Repository |
+| --- | --- |
+| Cursor-Chat / Anzeige | `thomas-giger/kc3k-web` |
+| Cloud-Agent-Checkout (dieses Projekt) | oft `tmp-db38e0d395290f50` (New-Project-Git) |
+| Live-Deploy | **github.com/seidenraupe/kc3k** |
+
+`GITHUB_PAT` wird nur injiziert, wenn das **Environment dieselben Repos** enthält wie der laufende Agent. Im Dashboard unter **Repositories** mindestens **`kc3k-web`** und das Agent-Repo (`tmp-…`) eintragen **oder** nur aus **`kc3k-web`** starten, sobald der Code dort der Hauptstand ist.
+
+**Start command** im Environment (optional): `bash .cursor/start.sh` — entspricht `.cursor/environment.json`.
+
 Test in einer **neuen Agent-Nachricht** (Secret wird oft erst beim Start der VM injiziert):
 
 ```bash
