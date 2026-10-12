@@ -34,6 +34,16 @@ git push origin main
 
 (Für `fetch` ggf. Cursor-Git-Zugangsdaten verwenden.)
 
+### Cloud-Agent-Secret `GITHUB_PAT`
+
+Für Push vom Agent nach GitHub: im **Cloud-Agent-Environment** (Dashboard → Environments → Runtime secrets) Secret **`GITHUB_PAT`** setzen — **nicht** nur unter GitHub Repository Secrets.
+
+Test in einer **neuen Agent-Nachricht** (Secret wird oft erst beim Start der VM injiziert):
+
+```bash
+./scripts/test-github-pat.sh
+```
+
 ### Variante B — GitHub Action (nach einmaligem Einspielen dieser Workflow-Datei)
 
 1. Secret **`CURSOR_AGENT_GIT_URL`**: Cursor-Git-URL inkl. Token (Lesezugriff auf das Agent-Repo).
