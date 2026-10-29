@@ -40,6 +40,7 @@ DirectoryIndex index.html
 
 <IfModule mod_mime.c>
   AddType application/pdf .pdf
+  AddType application/xml .xml
 </IfModule>
 
 <IfModule mod_deflate.c>
