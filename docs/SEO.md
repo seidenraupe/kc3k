@@ -13,6 +13,8 @@ Google und Bing zeigen oft noch alte Wix-URLs (`/news-1`, `/blank-page`, `/post/
 | Eigene **404** mit `<base href="/">` (Assets laden auch in Unterpfaden) | `src/404.html` |
 | `<link rel="canonical">` auf jeder Seite | Build in `vite.config.js` |
 | Sitemap & robots mit **https://kc3k.ch** (ohne www) | `public/sitemap.xml`, `robots.txt` |
+| `/upload/`, `/data/` nicht crawlen | `robots.txt` |
+| Kurz-URL → `.html` per **301** | `.htaccess` |
 
 ### Wix-Umleitungen
 
@@ -23,7 +25,7 @@ Google und Bing zeigen oft noch alte Wix-URLs (`/news-1`, `/blank-page`, `/post/
 | `/post/…` (36 News-Beiträge) | `/news.html` |
 | `/_files/…` (alte Dokumente) | `/news.html` |
 
-Slugs ohne Endung (`/team`, `/faq`, …) werden wie bisher auf `*.html` aufgelöst.
+Kurz-URLs ohne Endung (`/team`, `/faq`, …) → **301** auf `*.html` (eine kanonische URL pro Seite).
 
 ## Raschste Korrektur in Google (ca. 15 Minuten)
 
@@ -36,6 +38,15 @@ Slugs ohne Endung (`/team`, `/faq`, …) werden wie bisher auf `*.html` aufgelö
 ## Bing Webmaster Tools
 
 Sitemap ebenfalls unter `https://kc3k.ch/sitemap.xml` einreichen.
+
+## Search Console: „Seite mit Weiterleitung“ / „Gecrawlt – nicht indexiert“
+
+| Meldung | Bedeutung | Massnahme im Repo |
+| --- | --- | --- |
+| **Seite mit Weiterleitung** | Google hat eine URL gefunden, die **301** liefert (z. B. `www`, `/index.html`, `/news-1`, `/faq/`). Das ist **kein Defekt** — indexiert wird die **Ziel-URL**. | `.htaccess` beibehalten; in der URL-Prüfung die **Ziel-URL** indexieren lassen. |
+| **Gecrawlt – zurzeit nicht indexiert** | Google hat die Seite gesehen, indexiert sie aber (noch) nicht — oft Duplikate, dünne Inhalte oder niedrige Priorität. | Kanonische URLs vereinheitlicht (301 auf `.html`); `/upload/` und `/data/` in `robots.txt` ausgeschlossen. Rechtstexte/Anmelden ggf. über Sitemap + URL-Prüfung anstossen. |
+
+Nach Deploy: unter **Indexierung → Seiten** → betroffene URL öffnen → **Indexierung beantragen** (für die **kanonische** Adresse aus `rel=canonical`).
 
 ## Zeitrahmen
 

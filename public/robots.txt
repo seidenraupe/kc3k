@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /upload/
+Disallow: /data/
 
 Sitemap: https://kc3k.ch/sitemap.xml

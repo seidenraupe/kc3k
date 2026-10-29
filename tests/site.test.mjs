@@ -244,6 +244,9 @@ test("404-Seite und htaccess-Weiterleitungen", () => {
   assert.match(htaccess, /blank-page/);
   assert.match(htaccess, /news-1/);
   assert.match(htaccess, /ErrorDocument 404 \/404\.html/);
+  assert.match(htaccess, /R=301,L\]/);
+  const robots = readFileSync(resolve(dist, "robots.txt"), "utf8");
+  assert.match(robots, /Disallow: \/upload\//);
 });
 
 test("Interne Navigation zeigt auf vorhandene Dateien", () => {
